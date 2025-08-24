@@ -1,3 +1,9 @@
+import { Button } from "@/components/ui/button";
+
 export default function LandingPage() {
-  return <>Hello World</>;
+  return (
+    <>
+      <Button>hi</Button>
+    </>
+  );
 }
