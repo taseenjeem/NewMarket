@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import DefaultLoadingScreen from "@/components/global/loadings/DefaultLoadingScreen";
 
 export default function LandingPage() {
   return (
     <>
-      <Button>hi</Button>
+      <DefaultLoadingScreen />
     </>
   );
 }
