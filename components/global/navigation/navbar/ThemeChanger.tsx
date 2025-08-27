@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { MdOutlineDevices } from "react-icons/md";
 
 export function ThemeChanger() {
   const { setTheme } = useTheme();
@@ -24,13 +25,13 @@ export function ThemeChanger() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          <Sun /> Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          <Moon /> Dark
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+          <MdOutlineDevices /> System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
