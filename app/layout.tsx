@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/providers/StoreProvider";
 import Navbar from "@/components/global/navigations/navbar/Navbar";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const fontStyle = Roboto({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,10 +26,12 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${fontStyle.className} antialiased`}
       >
-        <StoreProvider>
-          <Navbar />
-          {children}
-        </StoreProvider>
+        <ThemeProvider>
+          <StoreProvider>
+            <Navbar />
+            {children}
+          </StoreProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

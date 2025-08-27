@@ -4,6 +4,7 @@ import SearchInput from "./SearchInput";
 import Container from "../../container/Container";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import UserAccount from "./UserAccount";
+import { ThemeChanger } from "./ThemeChanger";
 
 export default function Navbar() {
   return (
@@ -31,6 +32,7 @@ export default function Navbar() {
           </Link>
           <SearchInput />
           <UserAccount />
+          <ThemeChanger />
         </div>
       </Container>
     </nav>
