@@ -5,6 +5,8 @@ import Container from "../../container/Container";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import UserAccount from "./UserAccount";
 import { ThemeChanger } from "./ThemeChanger";
+import Cart from "./Cart";
+import Wishlist from "./Wishlist";
 
 export default function Navbar() {
   return (
@@ -12,13 +14,9 @@ export default function Navbar() {
       <Container size="full">
         <div className="flex items-center justify-around">
           <Link href="/">
-            <Image
-              priority
-              src="/images/new-market-logo.png"
-              alt="New Market Logo"
-              width={100}
-              height={100}
-            />
+            <p className="text-2xl font-semibold uppercase tracking-widest">
+              New Market
+            </p>
           </Link>
           <Link
             href={"tel:+8801632356445"}
@@ -31,8 +29,12 @@ export default function Navbar() {
             </span>
           </Link>
           <SearchInput />
-          <UserAccount />
-          <ThemeChanger />
+          <span className="flex items-center gap-2.5">
+            <UserAccount />
+            <Cart />
+            <Wishlist />
+            <ThemeChanger />
+          </span>
         </div>
       </Container>
     </nav>

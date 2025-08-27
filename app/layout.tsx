@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Barlow } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/providers/StoreProvider";
 import Navbar from "@/components/global/navigation/navbar/Navbar";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import WovenBackground from "@/components/ui/WovenBackground";
 
-const fontStyle = Roboto({
+const fontStyle = Barlow({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
