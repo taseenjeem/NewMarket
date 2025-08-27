@@ -8,7 +8,7 @@ import { ThemeChanger } from "./ThemeChanger";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full border-b">
+    <nav className="bg-background fixed top-0 z-50 w-full border-b">
       <Container size="full">
         <div className="flex items-center justify-around">
           <Link href="/">

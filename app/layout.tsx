@@ -4,6 +4,7 @@ import "./globals.css";
 import StoreProvider from "@/providers/StoreProvider";
 import Navbar from "@/components/global/navigation/navbar/Navbar";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import WovenBackground from "@/components/ui/WovenBackground";
 
 const fontStyle = Roboto({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -28,8 +29,10 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <StoreProvider>
-            <Navbar />
-            {children}
+            <WovenBackground>
+              <Navbar />
+              {children}
+            </WovenBackground>
           </StoreProvider>
         </ThemeProvider>
       </body>
