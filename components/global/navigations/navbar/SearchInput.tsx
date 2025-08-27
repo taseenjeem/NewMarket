@@ -5,7 +5,7 @@ import { Search } from "lucide-react";
 
 export default function SearchInput() {
   return (
-    <form>
+    <form className="w-full max-w-2xl">
       <div className="flex gap-1.5">
         <Input type="text" placeholder="Search" />
         <Button type="submit" size="icon">
