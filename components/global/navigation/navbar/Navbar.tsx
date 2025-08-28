@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import SearchInput from "./SearchInput";
 import Container from "../../container/Container";
@@ -10,8 +9,8 @@ import Wishlist from "./Wishlist";
 
 export default function Navbar() {
   return (
-    <nav className="bg-background fixed top-0 z-50 w-full border-b">
-      <Container size="full">
+    <nav className="fixed top-0 z-50 w-full border-b bg-transparent backdrop-blur-md">
+      <Container size="full" paddingY="xs">
         <div className="flex items-center justify-around">
           <Link href="/">
             <p className="text-2xl font-semibold uppercase tracking-widest">
@@ -20,11 +19,11 @@ export default function Navbar() {
           </Link>
           <Link
             href={"tel:+8801632356445"}
-            className="flex items-center gap-2.5"
+            className="flex items-center gap-2.5 rounded-md border p-2"
           >
-            <RiCustomerService2Fill size={40} />
+            <RiCustomerService2Fill size={37} />
             <span>
-              <p>Hotline 24/7</p>
+              <p className="text-sm font-semibold">Hotline 24/7</p>
               <p>+8801632356445</p>
             </span>
           </Link>
