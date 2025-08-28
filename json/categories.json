@@ -1,0 +1,11 @@
+[
+  { "id": "1", "link": "#", "category_name": "Fashion" },
+  { "id": "2", "link": "#", "category_name": "Phones & Tablets" },
+  { "id": "3", "link": "#", "category_name": "Laptop & Computers" },
+  { "id": "4", "link": "#", "category_name": "TV & Monitors" },
+  { "id": "5", "link": "#", "category_name": "Camera & Accessories" },
+  { "id": "6", "link": "#", "category_name": "Home & Decors" },
+  { "id": "7", "link": "#", "category_name": "Health & Beauties" },
+  { "id": "8", "link": "#", "category_name": "Game & Accessories" },
+  { "id": "9", "link": "#", "category_name": "Auto Parts" }
+]

@@ -9,11 +9,11 @@ import Wishlist from "./Wishlist";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 z-50 w-full border-b bg-transparent backdrop-blur-md">
+    <header className="fixed top-0 z-50 w-full border-b bg-transparent backdrop-blur-md">
       <Container size="full" paddingY="xs">
         <div className="flex items-center justify-around">
           <Link href="/">
-            <p className="text-2xl font-semibold uppercase tracking-widest">
+            <p className="text-2xl font-bold uppercase tracking-widest">
               New Market
             </p>
           </Link>
@@ -36,6 +36,6 @@ export default function Navbar() {
           </span>
         </div>
       </Container>
-    </nav>
+    </header>
   );
 }

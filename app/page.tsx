@@ -1,9 +1,9 @@
-import DefaultLoadingScreen from "@/components/global/loadings/DefaultLoadingScreen";
+import SubNavbar from "@/components/global/navigation/navbar/SubNavbar";
 
 export default function LandingPage() {
   return (
     <>
-      <DefaultLoadingScreen />
+      <SubNavbar />
     </>
   );
 }
