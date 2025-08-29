@@ -11,6 +11,45 @@ import {
   Undo2,
 } from "lucide-react";
 
+const NavLinks = [
+  {
+    id: "1",
+    link_label: "All Product",
+    icon: <GalleryVerticalEnd />,
+    href: "/all-product",
+  },
+  {
+    id: "2",
+    link_label: "Track Product",
+    icon: <Compass />,
+    href: "/track-product",
+  },
+  {
+    id: "3",
+    link_label: "Discounts & Coupons",
+    icon: <CirclePercent />,
+    href: "/discount-and-coupons",
+  },
+  {
+    id: "4",
+    link_label: "Help & Support",
+    icon: <Info />,
+    href: "/help-and-support",
+  },
+  {
+    id: "5",
+    link_label: "About Us",
+    icon: <Building2 />,
+    href: "/about-us",
+  },
+  {
+    id: "6",
+    link_label: "Returns & Refunds",
+    icon: <Undo2 />,
+    href: "/returns-and-refunds",
+  },
+];
+
 export default function SubNavbar() {
   return (
     <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[78px]">
@@ -18,60 +57,17 @@ export default function SubNavbar() {
         <div className="text-primary-foreground dark:text-primary flex w-full items-center gap-10">
           <CategorySheet />
           <div>
-            <Link href={"/all-products"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <GalleryVerticalEnd />
-                All Products
-              </Button>
-            </Link>
-            <Link href={"/track-product"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <Compass />
-                Track Product
-              </Button>
-            </Link>
-            <Link href={"/discount-and-coupons"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <CirclePercent />
-                Discounts & Coupons
-              </Button>
-            </Link>
-            <Link href={"/help-and-support"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <Info />
-                Help & Support
-              </Button>
-            </Link>
-            <Link href={"/about-us"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <Building2 />
-                About Us
-              </Button>
-            </Link>
-            <Link href={"/returns-and-refunds"}>
-              <Button
-                variant={"link"}
-                className="text-primary-foreground dark:text-primary"
-              >
-                <Undo2 />
-                Returns & Refunds
-              </Button>
-            </Link>
+            {NavLinks.map((i) => (
+              <Link key={i.id} href={i.href}>
+                <Button
+                  variant={"link"}
+                  className="text-primary-foreground dark:text-primary"
+                >
+                  {i.icon}
+                  {i.link_label}
+                </Button>
+              </Link>
+            ))}
           </div>
         </div>
       </Container>
