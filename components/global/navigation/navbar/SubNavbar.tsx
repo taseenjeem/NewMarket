@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Container from "../../container/Container";
 import CategorySheet from "./CategorySheet";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,7 +51,7 @@ const NavLinks = [
 
 export default function SubNavbar() {
   return (
-    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[79px]">
+    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[79px] hidden lg:block">
       <div className="container mx-auto px-4 py-2">
         <div className="text-primary-foreground dark:text-primary flex w-full items-center gap-10">
           <CategorySheet />
