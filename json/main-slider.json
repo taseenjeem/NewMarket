@@ -1,27 +1,27 @@
 [
   {
     "id": "1",
-    "image": "/images/slider-photos/slider1.webp",
+    "image": "/images/slider1.webp",
     "alt": "Slider picture 1"
   },
   {
     "id": "2",
-    "image": "/images/slider-photos/slider2.webp",
+    "image": "/images/slider2.webp",
     "alt": "Slider picture 3"
   },
   {
     "id": "3",
-    "image": "/images/slider-photos/slider3.webp",
+    "image": "/images/slider3.webp",
     "alt": "Slider picture 3"
   },
   {
     "id": "4",
-    "image": "/images/slider-photos/slider4.webp",
+    "image": "/images/slider4.webp",
     "alt": "Slider picture 4"
   },
   {
     "id": "5",
-    "image": "/images/slider-photos/slider5.webp",
+    "image": "/images/slider5.webp",
     "alt": "Slider picture 5"
   }
 ]
