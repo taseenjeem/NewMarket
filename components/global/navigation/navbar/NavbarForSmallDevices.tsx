@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import SearchDrawer from "./SearchDrawer";
 import Cart from "./Cart";
 import { MobileMenu } from "./MobileMenu";
 
