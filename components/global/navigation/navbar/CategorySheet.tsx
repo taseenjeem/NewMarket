@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import CategoryButton from "./CategoryButton";
+import CategoryButtonList from "./CategoryButtonList";
 
 export default function CategorySheet() {
   return (
@@ -21,7 +21,6 @@ export default function CategorySheet() {
             className="text-primary font-semibold uppercase"
           >
             <Menu />
-            Shop By Category
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
@@ -33,7 +32,7 @@ export default function CategorySheet() {
           </SheetHeader>
           <Separator />
           <div className="grid flex-1 auto-rows-min px-4">
-            <CategoryButton />
+            <CategoryButtonList />
           </div>
         </SheetContent>
       </Sheet>

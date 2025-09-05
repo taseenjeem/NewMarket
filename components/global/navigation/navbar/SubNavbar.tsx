@@ -6,9 +6,11 @@ import {
   CirclePercent,
   Compass,
   GalleryVerticalEnd,
+  HatGlasses,
   Info,
   Undo2,
 } from "lucide-react";
+import SearchInput from "./SearchInput";
 
 const NavLinks = [
   {
@@ -47,13 +49,19 @@ const NavLinks = [
     icon: <Undo2 />,
     href: "/returns-and-refunds",
   },
+  {
+    id: "7",
+    link_label: "Privacy & Policy",
+    icon: <HatGlasses />,
+    href: "/privacy-and-policy",
+  },
 ];
 
 export default function SubNavbar() {
   return (
-    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[79px] hidden lg:block">
-      <div className="container mx-auto px-4 py-2">
-        <div className="text-primary-foreground dark:text-primary flex w-full items-center gap-10">
+    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[72px] lg:my-[79px]">
+      <div className="container mx-auto px-4 py-4 lg:py-2">
+        <div className="text-primary-foreground dark:text-primary hidden w-full items-center gap-10 lg:flex">
           <CategorySheet />
           <div>
             {NavLinks.map((i) => (
@@ -68,6 +76,9 @@ export default function SubNavbar() {
               </Link>
             ))}
           </div>
+        </div>
+        <div className="block lg:hidden">
+          <SearchInput />
         </div>
       </div>
     </nav>

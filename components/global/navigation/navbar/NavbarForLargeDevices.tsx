@@ -10,7 +10,7 @@ import Logo from "./Logo";
 export default function NavbarForLargeDevices() {
   return (
     <header className="bg-background fixed top-0 z-50 hidden w-full border-b xl:block">
-      <div className="container mx-auto px-4 py-2">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between gap-14">
           <Link href="/">
             <Logo />
@@ -33,7 +33,7 @@ export default function NavbarForLargeDevices() {
             <ThemeChanger />
           </span>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }

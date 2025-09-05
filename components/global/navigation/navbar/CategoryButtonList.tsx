@@ -4,7 +4,7 @@ import ProductCategories from "@/json/categories.json";
 import { ProductCategoryInterface } from "@/interfaces";
 import { ArrowRight } from "lucide-react";
 
-export default function CategoryButton() {
+export default function CategoryButtonList() {
   return (
     <>
       {ProductCategories.map((product: ProductCategoryInterface) => (
