@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import sliderData from "@/json/main-slider.json";
 import Image from "next/image";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Link from "next/link";
 
 const settings = {
