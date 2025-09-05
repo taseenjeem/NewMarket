@@ -4,14 +4,22 @@ import PromotionalSections from "./PromotionalSections";
 
 export default function MarketingSections() {
   return (
-    <section className="container mx-auto mt-4 rounded px-4">
-      <AspectRatio
-        ratio={16 / 7}
-        className="grid size-full grid-cols-2 gap-4 rounded"
-      >
-        <MainSlider />
-        <PromotionalSections />
-      </AspectRatio>
-    </section>
+    <>
+      <section className="container mx-auto mt-4 hidden rounded px-4 md:block">
+        <AspectRatio
+          ratio={16 / 7}
+          className="grid size-full grid-cols-2 gap-4 rounded"
+        >
+          <MainSlider />
+          <PromotionalSections />
+        </AspectRatio>
+      </section>
+      <section className="container mx-auto mt-4 block rounded px-4 md:hidden">
+        <AspectRatio className="space-y-4">
+          <MainSlider />
+          <PromotionalSections />
+        </AspectRatio>
+      </section>
+    </>
   );
 }

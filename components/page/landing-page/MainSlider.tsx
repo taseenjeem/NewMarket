@@ -19,7 +19,7 @@ const settings = {
 
 export default function MainSlider() {
   return (
-    <div className="h-full w-full overflow-hidden rounded bg-green-600">
+    <div className="h-full w-full overflow-hidden rounded">
       <style jsx global>{`
         .slick-slider,
         .slick-list,
