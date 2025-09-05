@@ -59,7 +59,7 @@ const NavLinks = [
 
 export default function SubNavbar() {
   return (
-    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[72px] xl:my-[79px]">
+    <nav className="bg-secondary-foreground dark:bg-primary-foreground mt-[72px] xl:mt-[79px]">
       <div className="container mx-auto px-4 py-4 lg:py-2">
         <div className="text-primary-foreground dark:text-primary hidden w-full items-center gap-10 xl:flex">
           <CategorySheet />
