@@ -20,7 +20,7 @@ export default function CategorySheet() {
             variant="outline"
             className="text-primary font-semibold uppercase"
           >
-            <Menu />
+            <Menu /> Shop by category
           </Button>
         </SheetTrigger>
         <SheetContent side="left">

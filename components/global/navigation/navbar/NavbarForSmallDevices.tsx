@@ -6,7 +6,7 @@ import { MobileMenu } from "./MobileMenu";
 
 export default function NavbarForSmallDevices() {
   return (
-    <header className="bg-background fixed top-0 z-50 block w-full border-b md:hidden">
+    <header className="bg-background fixed top-0 z-50 block w-full border-b xl:hidden">
       <nav className="container mx-auto p-4">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2">
