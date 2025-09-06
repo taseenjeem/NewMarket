@@ -40,13 +40,13 @@ export default function Features() {
       {features.map((feature) => (
         <div
           key={feature.id}
-          className="bg-secondary flex flex-col rounded-xl border px-5 py-6"
+          className="bg-secondary flex flex-col rounded-xl border px-5 py-6 shadow-xl"
         >
           <div className="bg-muted mb-3 flex h-10 w-10 items-center justify-center rounded-full">
-            <feature.icon className="size-10" />
+            <feature.icon className="size-8 md:size-10" />
           </div>
-          <span className="text-lg font-semibold">{feature.title}</span>
-          <p className="text-foreground/80 mt-1 text-[15px]">
+          <span className="font-semibold md:text-lg">{feature.title}</span>
+          <p className="text-foreground/80 mt-1 text-xs md:text-base">
             {feature.description}
           </p>
         </div>
