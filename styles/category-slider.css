@@ -1,0 +1,12 @@
+.category-slider .slick-dots {
+  bottom: -50px;
+}
+
+.category-slider .slick-dots li button:before {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.category-slider .slick-dots li.slick-active button:before {
+  opacity: 1;
+}

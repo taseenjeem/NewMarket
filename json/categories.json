@@ -1,45 +1,55 @@
 [
   {
     "id": "1",
-    "slug": "#",
+    "slug": "fashion",
     "category_name": "Fashion",
     "thumbnail": "https://i.ibb.co.com/27xHFh5Q/fashion.webp"
   },
   {
     "id": "2",
-    "slug": "#",
+    "slug": "phones-and-tablets",
     "category_name": "Phones & Tablets",
     "thumbnail": "https://i.ibb.co.com/b5svpZMk/phones.webp"
   },
   {
     "id": "3",
-    "slug": "#",
+    "slug": "laptops",
     "category_name": "Laptop & Computers",
     "thumbnail": "https://i.ibb.co.com/8nMqbXt9/laptop.webp"
   },
-  { "id": "4", "slug": "#", "category_name": "TV & Monitors", "thumbnail": "" },
+  {
+    "id": "4",
+    "slug": "monitors",
+    "category_name": "Monitors",
+    "thumbnail": "https://i.ibb.co.com/DHzWqQjS/monitor.webp"
+  },
   {
     "id": "5",
-    "slug": "#",
+    "slug": "camera-and-accessories",
     "category_name": "Camera & Accessories",
     "thumbnail": "https://i.ibb.co.com/FkMqbR8P/camera.webp"
   },
-  { "id": "6", "slug": "#", "category_name": "Home & Decors", "thumbnail": "" },
+  {
+    "id": "6",
+    "slug": "home-and-decors",
+    "category_name": "Home & Decors",
+    "thumbnail": "https://i.ibb.co.com/WW3BDJSz/home-decor.webp"
+  },
   {
     "id": "7",
-    "slug": "#",
+    "slug": "health-and-beauty",
     "category_name": "Health & Beauties",
     "thumbnail": "https://i.ibb.co.com/whf2fRqp/beauty.webp"
   },
   {
     "id": "8",
-    "slug": "#",
+    "slug": "game-and-accessories",
     "category_name": "Game & Accessories",
     "thumbnail": "https://i.ibb.co.com/0R1C01T7/game.webp"
   },
   {
     "id": "9",
-    "slug": "#",
+    "slug": "auto-parts",
     "category_name": "Auto Parts",
     "thumbnail": "https://i.ibb.co.com/HTXGLB41/auto.webp"
   }
