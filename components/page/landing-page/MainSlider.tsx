@@ -34,7 +34,7 @@ export default function MainSlider() {
         {sliderData.map(({ id, image, alt }) => (
           <div key={id} className="h-full">
             <Link href="/" className="block h-full">
-              <div className="relative h-full w-full">
+              <div className="relative h-[343px] lg:size-full">
                 <Image
                   fill
                   priority

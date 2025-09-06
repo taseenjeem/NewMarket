@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function PromotionalSections() {
   return (
     <div className="grid h-full grid-rows-2 gap-4 rounded">
-      <Link href={""} className="relative size-full rounded">
+      <Link href={""} className="relative h-[164px] rounded lg:size-full">
         <Image
           fill
           priority
@@ -13,7 +13,7 @@ export default function PromotionalSections() {
           className="absolute rounded object-cover object-center"
         />
       </Link>
-      <Link href={""} className="relative size-full rounded">
+      <Link href={""} className="relative h-[164px] rounded lg:size-full">
         <Image
           fill
           priority
