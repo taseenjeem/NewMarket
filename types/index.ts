@@ -4,3 +4,10 @@ export type ProductCategoryType = {
   category_name: string;
   thumbnail: string;
 };
+
+export type FeatureInfoType = {
+  id: string;
+  icon: React.ElementType;
+  title: String;
+  description: string;
+};
