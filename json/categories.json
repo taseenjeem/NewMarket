@@ -1,11 +1,46 @@
 [
-  { "id": "1", "link": "#", "category_name": "Fashion" },
-  { "id": "2", "link": "#", "category_name": "Phones & Tablets" },
-  { "id": "3", "link": "#", "category_name": "Laptop & Computers" },
-  { "id": "4", "link": "#", "category_name": "TV & Monitors" },
-  { "id": "5", "link": "#", "category_name": "Camera & Accessories" },
-  { "id": "6", "link": "#", "category_name": "Home & Decors" },
-  { "id": "7", "link": "#", "category_name": "Health & Beauties" },
-  { "id": "8", "link": "#", "category_name": "Game & Accessories" },
-  { "id": "9", "link": "#", "category_name": "Auto Parts" }
+  {
+    "id": "1",
+    "slug": "#",
+    "category_name": "Fashion",
+    "thumbnail": "https://i.ibb.co.com/27xHFh5Q/fashion.webp"
+  },
+  {
+    "id": "2",
+    "slug": "#",
+    "category_name": "Phones & Tablets",
+    "thumbnail": "https://i.ibb.co.com/b5svpZMk/phones.webp"
+  },
+  {
+    "id": "3",
+    "slug": "#",
+    "category_name": "Laptop & Computers",
+    "thumbnail": "https://i.ibb.co.com/8nMqbXt9/laptop.webp"
+  },
+  { "id": "4", "slug": "#", "category_name": "TV & Monitors", "thumbnail": "" },
+  {
+    "id": "5",
+    "slug": "#",
+    "category_name": "Camera & Accessories",
+    "thumbnail": "https://i.ibb.co.com/FkMqbR8P/camera.webp"
+  },
+  { "id": "6", "slug": "#", "category_name": "Home & Decors", "thumbnail": "" },
+  {
+    "id": "7",
+    "slug": "#",
+    "category_name": "Health & Beauties",
+    "thumbnail": "https://i.ibb.co.com/whf2fRqp/beauty.webp"
+  },
+  {
+    "id": "8",
+    "slug": "#",
+    "category_name": "Game & Accessories",
+    "thumbnail": "https://i.ibb.co.com/0R1C01T7/game.webp"
+  },
+  {
+    "id": "9",
+    "slug": "#",
+    "category_name": "Auto Parts",
+    "thumbnail": "https://i.ibb.co.com/HTXGLB41/auto.webp"
+  }
 ]
