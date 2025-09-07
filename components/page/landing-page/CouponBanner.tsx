@@ -17,7 +17,7 @@ export default function CouponBanner({
 }: CouponBannerProps) {
   return (
     <section className="container mx-auto my-12 px-4">
-      <div className="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-gradient-to-r from-neutral-100 via-neutral-50 to-neutral-100 shadow-lg dark:border-neutral-700 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 dark:shadow-2xl">
+      <div className="bg-background relative w-full overflow-hidden rounded-lg border-2 shadow-2xl">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,0,0,0.03)_0%,transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.05)_0%,transparent_50%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.02)_0%,transparent_50%)] dark:bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
         <div className="relative px-4 py-3 sm:px-6 sm:py-4 lg:px-8 lg:py-6">
