@@ -1,3 +1,4 @@
+import ProductCard from "@/components/global/cards/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -22,6 +23,13 @@ export default function FlashDeals() {
             See all products <ArrowRight />
           </Button>
         </Link>
+      </div>
+
+      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </div>
     </section>
   );
