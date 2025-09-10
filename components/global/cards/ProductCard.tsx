@@ -8,13 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ReceiptText, ScanLine, ShoppingCart } from "lucide-react";
+import { ScanLine, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductCard() {
   return (
-    <Card className="h-full gap-2 py-2 md:gap-6 md:py-6">
+    <Card className="h-full gap-2 border-2 py-2 md:gap-6 md:py-6">
       <CardHeader className="space-y-2 px-2 md:px-6">
         <div className="relative h-[180px] w-full rounded-lg md:h-[314px]">
           <Image

@@ -40,7 +40,7 @@ export default function Features() {
       {features.map((feature) => (
         <div
           key={feature.id}
-          className="bg-secondary flex flex-col rounded-xl border px-5 py-6 shadow-xl"
+          className="bg-secondary flex flex-col rounded-xl border-2 px-5 py-6 shadow-xl"
         >
           <div className="bg-muted mb-3 flex h-10 w-10 items-center justify-center rounded-full">
             <feature.icon className="size-8 md:size-10" />

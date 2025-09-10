@@ -26,7 +26,7 @@ export default function TestimonialCard({
   testimonial: TestimonialType;
 }) {
   return (
-    <Card className="h-full">
+    <Card className="h-full border-2">
       <CardContent className="p-4 md:p-6">
         <div className="flex h-full flex-col">
           <Quote className="text-primary mb-3 h-8 w-8 opacity-20" />
