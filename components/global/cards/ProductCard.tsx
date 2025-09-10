@@ -24,19 +24,10 @@ export default function ProductCard() {
             className="rounded-lg object-cover object-center"
           />
         </div>
-        <CardTitle className="text-sm leading-tight md:text-base md:leading-normal">
-          Laptop Asus Vivobook I5 1355U, 8GB RAM, 512GB SSD
-        </CardTitle>
-        <Link href={"#"} className="w-full">
-          <Button
-            className="w-full text-xs md:text-sm"
-            variant={"outline"}
-            size="sm"
-          >
-            <ReceiptText className="h-3 w-3 md:h-4 md:w-4" />
-            <span className="hidden sm:inline">Show Details</span>
-            <span className="sm:hidden">Details</span>
-          </Button>
+        <Link href={"#"} className="hover:text-muted-foreground duration-300">
+          <CardTitle className="text-sm leading-tight md:text-base md:leading-normal">
+            Laptop Asus Vivobook I5 1355U, 8GB RAM, 512GB SSD
+          </CardTitle>
         </Link>
       </CardHeader>
       <Separator />
