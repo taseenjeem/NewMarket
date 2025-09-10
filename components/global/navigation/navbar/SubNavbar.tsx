@@ -21,9 +21,9 @@ const NavLinks = [
   },
   {
     id: "2",
-    link_label: "Track Product",
+    link_label: "Track Order",
     icon: <Compass />,
-    href: "/track-product",
+    href: "/track-order",
   },
   {
     id: "3",
