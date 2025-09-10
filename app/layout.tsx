@@ -3,6 +3,7 @@ import { Barlow } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/providers/StoreProvider";
 import Navbar from "@/components/global/navigation/navbar/Navbar";
+import MainFooter from "@/components/global/footer/MainFooter";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import WovenBackground from "@/components/ui/WovenBackground";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
             <WovenBackground>
               <Navbar />
               {children}
+              <MainFooter />
             </WovenBackground>
           </StoreProvider>
         </ThemeProvider>

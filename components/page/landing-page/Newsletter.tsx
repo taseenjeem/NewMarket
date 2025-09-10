@@ -41,9 +41,9 @@ export default function Newsletter() {
               <Input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 border-white/20 bg-white/10 text-white placeholder:text-white/70 focus:bg-white/20"
+                className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/70 focus:bg-white/20"
               />
-              <Button className="bg-white px-8 font-semibold text-blue-600 hover:bg-gray-100">
+              <Button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8">
                 Subscribe
               </Button>
             </div>
@@ -54,9 +54,7 @@ export default function Newsletter() {
 
           {/* Social Proof */}
           <div className="mt-8 text-sm opacity-75">
-            <p>
-              Join 50,000+ happy subscribers already getting the best deals!
-            </p>
+            <p>Join 50,000+ happy subscribers already getting the best deals!</p>
           </div>
         </div>
       </div>
