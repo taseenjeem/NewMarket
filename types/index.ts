@@ -11,3 +11,13 @@ export type FeatureInfoType = {
   title: String;
   description: string;
 };
+
+export type TestimonialType = {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  testimonial: string;
+  product?: string;
+};
