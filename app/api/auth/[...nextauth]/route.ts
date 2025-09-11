@@ -5,7 +5,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
-// Extend NextAuth types
 declare module "next-auth" {
   interface Session {
     user: {
@@ -13,7 +12,11 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      isAdmin?: boolean;
     };
+  }
+  interface JWT {
+    isAdmin?: boolean;
   }
 }
 
@@ -58,6 +61,7 @@ const handler = NextAuth({
           id: user.id,
           email: user.email,
           name: user.name,
+          isAdmin: user.isAdmin,
         };
       },
     }),
@@ -66,12 +70,14 @@ const handler = NextAuth({
     async session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string;
+        session.user.isAdmin = token.isAdmin as boolean;
       }
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.isAdmin = (user as any).isAdmin;
       }
       return token;
     },
