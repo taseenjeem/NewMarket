@@ -1,0 +1,169 @@
+[
+  {
+    "id": "1",
+    "title": "Summer Sale Extravaganza",
+    "description": "Get up to 60% off on summer essentials including clothing, accessories, and home decor items.",
+    "discountType": "percentage",
+    "discountValue": 60,
+    "code": "SUMMER60",
+    "image": "/images/promotional1.webp",
+    "category": "Fashion & Lifestyle",
+    "validUntil": "2025-08-31",
+    "minPurchase": 50,
+    "maxDiscount": 200,
+    "terms": [
+      "Valid on selected items only",
+      "Cannot be combined with other offers",
+      "Minimum purchase of $50 required"
+    ],
+    "featured": true,
+
+    "status": "active"
+  },
+  {
+    "id": "2",
+    "title": "Free Shipping Weekend",
+    "description": "Enjoy free shipping on all orders this weekend! No minimum purchase required.",
+    "discountType": "shipping",
+    "discountValue": 0,
+    "code": "FREESHIP",
+    "image": "/images/promotional2.webp",
+    "category": "All Categories",
+    "validUntil": "2025-03-15",
+    "minPurchase": 0,
+    "maxDiscount": null,
+    "terms": [
+      "Valid for weekend only",
+      "Applies to all shipping methods",
+      "No minimum purchase required"
+    ],
+    "featured": true,
+
+    "status": "active"
+  },
+  {
+    "id": "3",
+    "title": "Flash Sale - 24 Hours Only",
+    "description": "Lightning deal! Get 45% off on selected items for the next 24 hours only. Don't miss out!",
+    "discountType": "percentage",
+    "discountValue": 45,
+    "code": "FLASH45",
+    "image": "/images/slider1.webp",
+    "category": "Selected Items",
+    "validUntil": "2025-02-20",
+    "minPurchase": 30,
+    "maxDiscount": 150,
+    "terms": [
+      "Valid for 24 hours only",
+      "Limited stock available",
+      "First come, first served"
+    ],
+    "featured": false,
+
+    "status": "active"
+  },
+  {
+    "id": "4",
+    "title": "New Customer Welcome",
+    "description": "Welcome to our store! Enjoy 25% off on your first purchase as a new customer.",
+    "discountType": "percentage",
+    "discountValue": 25,
+    "code": "WELCOME25",
+    "image": "/images/slider2.webp",
+    "category": "All Categories",
+    "validUntil": "2025-12-31",
+    "minPurchase": 25,
+    "maxDiscount": 100,
+    "terms": [
+      "Valid for new customers only",
+      "One-time use per customer",
+      "Cannot be combined with other offers"
+    ],
+    "featured": false,
+
+    "status": "active"
+  },
+  {
+    "id": "5",
+    "title": "Buy 2 Get 1 Free",
+    "description": "Amazing deal on electronics! Buy any 2 items and get the 3rd one absolutely free.",
+    "discountType": "bogo",
+    "discountValue": 0,
+    "code": "BUY2GET1",
+    "image": "/images/slider3.webp",
+    "category": "Electronics",
+    "validUntil": "2025-06-30",
+    "minPurchase": 100,
+    "maxDiscount": null,
+    "terms": [
+      "Valid on electronics only",
+      "Lowest priced item will be free",
+      "Cannot be combined with other offers"
+    ],
+    "featured": true,
+    "status": "active"
+  },
+  {
+    "id": "6",
+    "title": "Student Discount",
+    "description": "Students save more! Get 20% off on all items with valid student ID verification.",
+    "discountType": "percentage",
+    "discountValue": 20,
+    "code": "STUDENT20",
+    "image": "/images/slider4.webp",
+    "category": "All Categories",
+    "validUntil": "2025-09-30",
+    "minPurchase": 20,
+    "maxDiscount": 80,
+    "terms": [
+      "Valid student ID required",
+      "Cannot be combined with other offers",
+      "Verification required at checkout"
+    ],
+    "featured": false,
+
+    "status": "active"
+  },
+  {
+    "id": "7",
+    "title": "Weekend Special",
+    "description": "Weekend vibes! Enjoy $15 off on orders above $75 this weekend only.",
+    "discountType": "fixed",
+    "discountValue": 15,
+    "code": "WEEKEND15",
+    "image": "/images/slider5.webp",
+    "category": "All Categories",
+    "validUntil": "2025-03-02",
+    "minPurchase": 75,
+    "maxDiscount": null,
+    "terms": [
+      "Valid on weekends only",
+      "Minimum purchase of $75 required",
+      "Cannot be combined with other offers"
+    ],
+    "featured": false,
+
+    "status": "active"
+  },
+  {
+    "id": "8",
+    "title": "Loyalty Rewards",
+    "description": "Thank you for being loyal! Enjoy 30% off as our valued customer reward.",
+    "discountType": "percentage",
+    "discountValue": 30,
+    "code": "LOYAL30",
+    "image": "/images/promotional1.webp",
+    "category": "All Categories",
+    "validUntil": "2025-05-15",
+    "minPurchase": 40,
+    "maxDiscount": 120,
+    "terms": [
+      "Valid for loyalty members only",
+      "Membership verification required",
+      "Cannot be combined with other offers"
+    ],
+    "featured": true,
+
+    "status": "active"
+  }
+]

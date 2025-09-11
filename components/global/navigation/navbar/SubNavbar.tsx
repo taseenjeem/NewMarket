@@ -29,7 +29,7 @@ const NavLinks = [
     id: "3",
     link_label: "Discounts & Coupons",
     icon: <CirclePercent />,
-    href: "/discount-and-coupons",
+    href: "/discounts-and-coupons",
   },
   {
     id: "4",
