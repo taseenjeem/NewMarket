@@ -2,7 +2,7 @@ import Link from "next/link";
 import SearchInput from "./SearchInput";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import UserAccount from "./UserAccount";
-import { ThemeChanger } from "./ThemeChanger";
+
 import Cart from "./Cart";
 import Wishlist from "./Wishlist";
 import Logo from "./Logo";
@@ -30,7 +30,7 @@ export default function NavbarForLargeDevices() {
             <UserAccount />
             <Cart />
             <Wishlist />
-            <ThemeChanger />
+
           </span>
         </div>
       </nav>
