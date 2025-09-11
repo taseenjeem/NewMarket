@@ -6,7 +6,7 @@ import { Home, ArrowLeft, ShoppingCart } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="from-background via-muted/20 to-background flex min-h-screen items-center justify-center bg-gradient-to-br p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="mx-auto max-w-2xl space-y-8 text-center">
         {/* 404 Visual */}
         <div className="relative">
@@ -34,7 +34,7 @@ export default function NotFound() {
               <div>
                 <h3 className="text-lg font-semibold">Go Home</h3>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Return to our homepage and explore what's new
+                  Return to our homepage
                 </p>
                 <Button asChild className="w-full">
                   <Link href="/">
@@ -52,7 +52,7 @@ export default function NotFound() {
               <div>
                 <h3 className="text-lg font-semibold">Browse Products</h3>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Discover amazing deals and products
+                  Discover amazing deals
                 </p>
                 <Button asChild variant="outline" className="w-full">
                   <Link href="/">
