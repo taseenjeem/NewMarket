@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,13 +18,6 @@ import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Phone } from "lucide-react";
 import { FaGoogle } from "react-icons/fa6";
-import { useAppDispatch, useAppSelector } from "@/store";
-import {
-  signUpStart,
-  signUpSuccess,
-  signUpFailure,
-  clearError,
-} from "@/store/slices/authSlice";
 
 type SignUpFormData = {
   firstName: string;
@@ -34,8 +29,9 @@ type SignUpFormData = {
 };
 
 export default function SignUpPage() {
-  const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -51,24 +47,64 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: SignUpFormData) => {
     if (!acceptTerms) {
-      dispatch(signUpFailure("Please accept the terms and conditions"));
+      setError("Please accept the terms and conditions");
       return;
     }
 
-    dispatch(signUpStart());
-    dispatch(clearError());
+    setIsLoading(true);
+    setError(null);
 
-    // TODO: Implement actual registration logic
-    setTimeout(() => {
-      dispatch(
-        signUpSuccess({
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
           email: data.email,
-          name: `${data.firstName} ${data.lastName}`,
           phone: data.phone,
+          password: data.password,
         }),
-      );
-      console.log("Registration data:", data);
-    }, 1000);
+      });
+
+      if (response.ok) {
+        // Auto sign in after successful registration
+        const result = await signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+
+        if (result?.ok) {
+          router.push("/");
+        } else {
+          setError(
+            "Registration successful, but sign in failed. Please try signing in manually.",
+          );
+        }
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Registration failed");
+      }
+    } catch (err) {
+      setError("An error occurred during registration");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (err) {
+      setError("An error occurred during Google sign in");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -105,7 +141,12 @@ export default function SignUpPage() {
 
             {/* Social Login Buttons */}
             <div className="w-full">
-              <Button variant="outline" className="w-full">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={handleGoogleSignIn}
+                disabled={isLoading}
+              >
                 <FaGoogle className="mr-2 h-4 w-4" />
                 Continue with Google
               </Button>

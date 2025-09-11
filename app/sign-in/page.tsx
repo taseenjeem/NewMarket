@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { signIn, getSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,13 +19,6 @@ import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Mail, Lock, ArrowLeft } from "lucide-react";
 import { FaGoogle } from "react-icons/fa6";
-import { useAppDispatch, useAppSelector } from "@/store";
-import {
-  signInStart,
-  signInSuccess,
-  signInFailure,
-  clearError,
-} from "@/store/slices/authSlice";
 
 type SignInFormData = {
   email: string;
@@ -31,8 +26,9 @@ type SignInFormData = {
 };
 
 export default function SignInPage() {
-  const dispatch = useAppDispatch();
-  const { isLoading, error } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -42,18 +38,40 @@ export default function SignInPage() {
   } = useForm<SignInFormData>();
 
   const onSubmit = async (data: SignInFormData) => {
-    dispatch(signInStart());
-    dispatch(clearError());
+    setIsLoading(true);
+    setError(null);
 
-    // Simulate API call
-    setTimeout(() => {
-      if (data.email === "test@example.com" && data.password === "password") {
-        dispatch(signInSuccess({ email: data.email, name: "Test User" }));
-        console.log("Sign in successful");
+    try {
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("Invalid email or password");
       } else {
-        dispatch(signInFailure("Invalid email or password"));
+        // Refresh session and redirect
+        await getSession();
+        router.push("/");
       }
-    }, 1000);
+    } catch (err) {
+      setError("An error occurred during sign in");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (err) {
+      setError("An error occurred during Google sign in");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -87,7 +105,12 @@ export default function SignInPage() {
             )}
 
             {/* Social Login Button */}
-            <Button variant="outline" className="w-full">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={handleGoogleSignIn}
+              disabled={isLoading}
+            >
               <FaGoogle className="mr-2 h-4 w-4" />
               Continue with Google
             </Button>

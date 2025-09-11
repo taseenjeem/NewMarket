@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,13 +9,36 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, Settings, User } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function UserAccount() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <Button variant="outline" disabled>
+        <User /> Loading...
+      </Button>
+    );
+  }
+
+  if (!session) {
+    return (
+      <Link href={"/sign-in"}>
+        <Button variant="outline">
+          <User />
+          My Account
+        </Button>
+      </Link>
+    );
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <User /> Account
+          <User /> {session.user?.name || "Account"}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -27,7 +51,11 @@ export default function UserAccount() {
           <Settings />
           Settings
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="text-red-600 focus:text-red-600"
+        >
           <LogOut />
           Logout
         </DropdownMenuItem>

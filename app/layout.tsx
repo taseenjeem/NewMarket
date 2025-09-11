@@ -6,6 +6,7 @@ import Navbar from "@/components/global/navigation/navbar/Navbar";
 import MainFooter from "@/components/global/footer/MainFooter";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import WovenBackground from "@/components/ui/WovenBackground";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const fontStyle = Barlow({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -28,15 +29,17 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${fontStyle.className} antialiased`}
       >
-        <ThemeProvider>
-          <StoreProvider>
-            <WovenBackground>
-              <Navbar />
-              {children}
-              <MainFooter />
-            </WovenBackground>
-          </StoreProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <StoreProvider>
+              <WovenBackground>
+                <Navbar />
+                {children}
+                <MainFooter />
+              </WovenBackground>
+            </StoreProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
