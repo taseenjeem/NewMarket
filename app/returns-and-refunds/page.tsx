@@ -27,7 +27,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Returns & Refunds - New Market | Easy Return Policy & Process",
-  description: "Learn about New Market's hassle-free return and refund policy. Find step-by-step return instructions, eligible items, refund timeframes, and contact information for return support.",
+  description:
+    "Learn about New Market's hassle-free return and refund policy. Find step-by-step return instructions, eligible items, refund timeframes, and contact information for return support.",
   keywords: [
     "returns policy",
     "refunds",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     "product returns",
     "customer returns",
     "return instructions",
-    "refund process"
+    "refund process",
   ],
   authors: [{ name: "New Market Customer Service" }],
   creator: "New Market",
@@ -61,13 +62,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://newmarket.com/returns-and-refunds",
     title: "Returns & Refunds - New Market | Easy Return Policy & Process",
-    description: "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
+    description:
+      "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
     siteName: "New Market",
   },
   twitter: {
     card: "summary_large_image",
     title: "Returns & Refunds - New Market | Easy Return Policy & Process",
-    description: "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
+    description:
+      "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
     creator: "@newmarket",
   },
 };
@@ -186,7 +189,7 @@ export default function ReturnsAndRefundsPage() {
   ];
 
   return (
-    <div className="min-h-screen py-12">
+    <main className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="mb-16 text-center">
@@ -485,6 +488,6 @@ export default function ReturnsAndRefundsPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

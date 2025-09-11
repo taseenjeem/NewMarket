@@ -36,7 +36,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Help & Support - New Market | Customer Service & FAQ",
-  description: "Get help with your New Market orders, returns, payments, and more. Find answers in our FAQ section or contact our 24/7 customer support team for personalized assistance.",
+  description:
+    "Get help with your New Market orders, returns, payments, and more. Find answers in our FAQ section or contact our 24/7 customer support team for personalized assistance.",
   keywords: [
     "customer support",
     "help center",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     "shipping questions",
     "technical support",
     "live chat",
-    "phone support"
+    "phone support",
   ],
   authors: [{ name: "New Market Support Team" }],
   creator: "New Market",
@@ -70,13 +71,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://newmarket.com/help-and-support",
     title: "Help & Support - New Market | Customer Service & FAQ",
-    description: "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
+    description:
+      "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
     siteName: "New Market",
   },
   twitter: {
     card: "summary_large_image",
     title: "Help & Support - New Market | Customer Service & FAQ",
-    description: "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
+    description:
+      "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
     creator: "@newmarket",
   },
 };
@@ -159,7 +162,7 @@ export default function HelpAdSupportPage() {
   ];
 
   return (
-    <div className="min-h-screen py-12">
+    <main className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="mb-12 text-center">
@@ -438,6 +441,6 @@ export default function HelpAdSupportPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

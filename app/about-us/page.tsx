@@ -25,7 +25,8 @@ import {
 
 export const metadata: Metadata = {
   title: "About Us - New Market | Our Story, Mission & Values",
-  description: "Learn about New Market's journey, mission to provide quality products at affordable prices, our core values, and the dedicated team behind your shopping experience.",
+  description:
+    "Learn about New Market's journey, mission to provide quality products at affordable prices, our core values, and the dedicated team behind your shopping experience.",
   keywords: [
     "about new market",
     "company story",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     "customer service",
     "online marketplace",
     "company history",
-    "leadership team"
+    "leadership team",
   ],
   authors: [{ name: "New Market Team" }],
   creator: "New Market",
@@ -57,13 +58,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://newmarket.com/about-us",
     title: "About Us - New Market | Our Story, Mission & Values",
-    description: "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
+    description:
+      "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
     siteName: "New Market",
   },
   twitter: {
     card: "summary_large_image",
     title: "About Us - New Market | Our Story, Mission & Values",
-    description: "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
+    description:
+      "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
     creator: "@newmarket",
   },
 };
@@ -151,7 +154,7 @@ export default function AboutUsPage() {
   ];
 
   return (
-    <div className="min-h-screen py-12">
+    <main className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="mb-16 text-center">
@@ -390,6 +393,6 @@ export default function AboutUsPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
