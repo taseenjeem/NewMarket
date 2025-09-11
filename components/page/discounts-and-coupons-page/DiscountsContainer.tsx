@@ -43,7 +43,6 @@ export default function DiscountsContainer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-
   const [loading, setLoading] = useState(true);
 
   // Load discount data

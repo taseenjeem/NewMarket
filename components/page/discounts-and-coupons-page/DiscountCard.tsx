@@ -180,15 +180,6 @@ export default function DiscountCard({ discount, onClick }: DiscountCardProps) {
               })}
             </span>
           </div>
-
-          {/* Action Button */}
-          <Button
-            className="mt-4 w-full"
-            variant={expired ? "secondary" : "default"}
-            disabled={expired}
-          >
-            {expired ? "Expired" : "View Details"}
-          </Button>
         </div>
       </CardContent>
     </Card>
