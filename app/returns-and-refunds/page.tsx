@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -23,6 +24,53 @@ import {
   Truck,
   RefreshCw,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Returns & Refunds - New Market | Easy Return Policy & Process",
+  description: "Learn about New Market's hassle-free return and refund policy. Find step-by-step return instructions, eligible items, refund timeframes, and contact information for return support.",
+  keywords: [
+    "returns policy",
+    "refunds",
+    "return process",
+    "exchange policy",
+    "money back guarantee",
+    "return shipping",
+    "refund timeframe",
+    "return eligibility",
+    "product returns",
+    "customer returns",
+    "return instructions",
+    "refund process"
+  ],
+  authors: [{ name: "New Market Customer Service" }],
+  creator: "New Market",
+  publisher: "New Market",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://newmarket.com/returns-and-refunds",
+    title: "Returns & Refunds - New Market | Easy Return Policy & Process",
+    description: "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
+    siteName: "New Market",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Returns & Refunds - New Market | Easy Return Policy & Process",
+    description: "Learn about our hassle-free return and refund policy. Step-by-step return instructions and refund information.",
+    creator: "@newmarket",
+  },
+};
 
 export default function ReturnsAndRefundsPage() {
   const returnSteps = [

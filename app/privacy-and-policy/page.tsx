@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -26,6 +27,53 @@ import {
   Settings,
   UserCheck,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy - New Market | Data Protection & User Rights",
+  description: "Learn how New Market protects your privacy and personal data. Our comprehensive privacy policy covers data collection, usage, security measures, user rights, and cookie policies.",
+  keywords: [
+    "privacy policy",
+    "data protection",
+    "user privacy",
+    "GDPR compliance",
+    "data security",
+    "personal information",
+    "cookie policy",
+    "user rights",
+    "data retention",
+    "privacy rights",
+    "data collection",
+    "information security"
+  ],
+  authors: [{ name: "New Market Legal Team" }],
+  creator: "New Market",
+  publisher: "New Market",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://newmarket.com/privacy-and-policy",
+    title: "Privacy Policy - New Market | Data Protection & User Rights",
+    description: "Learn how New Market protects your privacy and personal data. Comprehensive privacy policy covering data collection, usage, and security.",
+    siteName: "New Market",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy - New Market | Data Protection & User Rights",
+    description: "Learn how New Market protects your privacy and personal data. Comprehensive privacy policy covering data collection, usage, and security.",
+    creator: "@newmarket",
+  },
+};
 
 export default function PrivacyAndPolicyPage() {
   const dataTypes = [

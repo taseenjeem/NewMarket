@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -32,6 +33,53 @@ import {
   BookOpen,
   Headphones,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Help & Support - New Market | Customer Service & FAQ",
+  description: "Get help with your New Market orders, returns, payments, and more. Find answers in our FAQ section or contact our 24/7 customer support team for personalized assistance.",
+  keywords: [
+    "customer support",
+    "help center",
+    "FAQ",
+    "contact us",
+    "customer service",
+    "order help",
+    "returns help",
+    "payment support",
+    "shipping questions",
+    "technical support",
+    "live chat",
+    "phone support"
+  ],
+  authors: [{ name: "New Market Support Team" }],
+  creator: "New Market",
+  publisher: "New Market",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://newmarket.com/help-and-support",
+    title: "Help & Support - New Market | Customer Service & FAQ",
+    description: "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
+    siteName: "New Market",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Help & Support - New Market | Customer Service & FAQ",
+    description: "Get help with your orders, returns, payments, and more. Find answers in our FAQ or contact our 24/7 support team.",
+    creator: "@newmarket",
+  },
+};
 
 export default function HelpAdSupportPage() {
   const supportCategories = [

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -21,6 +22,51 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us - New Market | Our Story, Mission & Values",
+  description: "Learn about New Market's journey, mission to provide quality products at affordable prices, our core values, and the dedicated team behind your shopping experience.",
+  keywords: [
+    "about new market",
+    "company story",
+    "mission",
+    "values",
+    "team",
+    "quality products",
+    "customer service",
+    "online marketplace",
+    "company history",
+    "leadership team"
+  ],
+  authors: [{ name: "New Market Team" }],
+  creator: "New Market",
+  publisher: "New Market",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://newmarket.com/about-us",
+    title: "About Us - New Market | Our Story, Mission & Values",
+    description: "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
+    siteName: "New Market",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us - New Market | Our Story, Mission & Values",
+    description: "Learn about New Market's journey, mission, values, and the dedicated team behind your shopping experience.",
+    creator: "@newmarket",
+  },
+};
 
 export default function AboutUsPage() {
   const teamMembers = [
