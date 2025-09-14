@@ -197,7 +197,7 @@ export default function SignInPage() {
                   </Label>
                 </div>
                 <Link
-                  href="/reset-password"
+                  href="/auth/forgot-password"
                   className="text-primary text-sm hover:underline"
                 >
                   Forgot password?
@@ -215,7 +215,7 @@ export default function SignInPage() {
                 Don't have an account?{" "}
               </span>
               <Link
-                href="/sign-up"
+                href="/auth/sign-up"
                 className="text-primary font-medium hover:underline"
               >
                 Sign up

@@ -12,8 +12,8 @@ const adminRoutes = ["/admin", "/api/admin"];
 
 // Define auth routes (redirect if already authenticated)
 const authRoutes = [
-  "/sign-in",
-  "/sign-up",
+  "/auth/sign-in",
+  "/auth/sign-up",
   "/auth/forgot-password",
   "/auth/reset-password",
   "/auth/verify-email",
@@ -59,7 +59,7 @@ export default withAuth(
       },
     },
     pages: {
-      signIn: "/sign-in",
+      signIn: "/auth/sign-in",
     },
   },
 );

@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState<string>('');
+  const [submittedEmail, setSubmittedEmail] = useState<string>("");
 
   const {
     register,
@@ -39,10 +39,10 @@ export default function ForgotPasswordPage() {
     setSuccess(false);
 
     try {
-      const response = await fetch('/api/auth/reset-password/request', {
-        method: 'POST',
+      const response = await fetch("/api/auth/reset-password/request", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: data.email }),
       });
@@ -53,10 +53,10 @@ export default function ForgotPasswordPage() {
         setSuccess(true);
         setSubmittedEmail(data.email);
       } else {
-        setError(result.error || 'Failed to send reset email');
+        setError(result.error || "Failed to send reset email");
       }
     } catch (err) {
-      setError('An error occurred while sending the reset email');
+      setError("An error occurred while sending the reset email");
     } finally {
       setIsLoading(false);
     }
@@ -64,15 +64,15 @@ export default function ForgotPasswordPage() {
 
   const handleResendEmail = async () => {
     if (!submittedEmail) return;
-    
+
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('/api/auth/reset-password/request', {
-        method: 'POST',
+      const response = await fetch("/api/auth/reset-password/request", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: submittedEmail }),
       });
@@ -81,10 +81,10 @@ export default function ForgotPasswordPage() {
         setError(null);
       } else {
         const result = await response.json();
-        setError(result.error || 'Failed to resend reset email');
+        setError(result.error || "Failed to resend reset email");
       }
     } catch (err) {
-      setError('An error occurred while resending the reset email');
+      setError("An error occurred while resending the reset email");
     } finally {
       setIsLoading(false);
     }
@@ -115,7 +115,8 @@ export default function ForgotPasswordPage() {
                 Check Your Email
               </CardTitle>
               <CardDescription>
-                We've sent a password reset link to <strong>{submittedEmail}</strong>
+                We've sent a password reset link to{" "}
+                <strong>{submittedEmail}</strong>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -127,9 +128,9 @@ export default function ForgotPasswordPage() {
               )}
 
               {/* Instructions */}
-              <div className="rounded-lg bg-muted p-4 text-sm">
+              <div className="bg-muted rounded-lg p-4 text-sm">
                 <p className="mb-2 font-medium">What to do next:</p>
-                <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
+                <ol className="text-muted-foreground list-inside list-decimal space-y-1">
                   <li>Check your email inbox</li>
                   <li>Click the reset link in the email</li>
                   <li>Create your new password</li>
@@ -158,7 +159,7 @@ export default function ForgotPasswordPage() {
                 </Button>
 
                 <Button
-                  onClick={() => router.push('/sign-in')}
+                  onClick={() => router.push("/auth/sign-in")}
                   variant="ghost"
                   className="w-full"
                 >
@@ -169,10 +170,13 @@ export default function ForgotPasswordPage() {
           </Card>
 
           {/* Help Text */}
-          <div className="text-center text-sm text-muted-foreground">
+          <div className="text-muted-foreground text-center text-sm">
             <p>
-              Didn't receive the email? Check your spam folder or{' '}
-              <Link href="/help-and-support" className="underline hover:text-foreground">
+              Didn't receive the email? Check your spam folder or{" "}
+              <Link
+                href="/help-and-support"
+                className="hover:text-foreground underline"
+              >
                 contact support
               </Link>
             </p>
@@ -203,7 +207,8 @@ export default function ForgotPasswordPage() {
               Forgot Password?
             </CardTitle>
             <CardDescription>
-              Enter your email address and we'll send you a link to reset your password
+              Enter your email address and we'll send you a link to reset your
+              password
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -220,23 +225,25 @@ export default function ForgotPasswordPage() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Mail className="text-muted-foreground absolute left-3 top-3 h-4 w-4" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email address"
                     className="pl-10"
-                    {...register('email', {
-                      required: 'Email is required',
+                    {...register("email", {
+                      required: "Email is required",
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Please enter a valid email address',
+                        message: "Please enter a valid email address",
                       },
                     })}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                  <p className="text-destructive text-sm">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -259,8 +266,8 @@ export default function ForgotPasswordPage() {
             {/* Back to Sign In */}
             <div className="text-center">
               <Link
-                href="/sign-in"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                href="/auth/sign-in"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
               >
                 Remember your password? Sign in
               </Link>
@@ -269,10 +276,13 @@ export default function ForgotPasswordPage() {
         </Card>
 
         {/* Additional Help */}
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-muted-foreground text-center text-sm">
           <p>
-            Need help?{' '}
-            <Link href="/help-and-support" className="underline hover:text-foreground">
+            Need help?{" "}
+            <Link
+              href="/help-and-support"
+              className="hover:text-foreground underline"
+            >
               Contact our support team
             </Link>
           </p>

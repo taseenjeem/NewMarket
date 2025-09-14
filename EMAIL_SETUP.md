@@ -118,7 +118,7 @@ This guide will help you configure email services for your authentication system
    ```
 
 2. **Test email verification:**
-   - Register a new user at `/sign-up`
+   - Register a new user at `/auth/sign-up`
    - Check console logs for email content (development mode)
    - Check your email inbox for verification email
 

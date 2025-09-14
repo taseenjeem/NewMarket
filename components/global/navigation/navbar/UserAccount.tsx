@@ -25,7 +25,7 @@ export default function UserAccount() {
 
   if (!session) {
     return (
-      <Link href={"/sign-in"}>
+      <Link href={"/auth/sign-in"}>
         <Button variant="outline">
           <User />
           My Account

@@ -14,21 +14,35 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ArrowLeft, Lock, Eye, EyeOff, Loader2, CheckCircle, XCircle } from "lucide-react";
+import {
+  ArrowLeft,
+  Lock,
+  Eye,
+  EyeOff,
+  Loader2,
+  CheckCircle,
+  XCircle,
+} from "lucide-react";
 
 type ResetPasswordFormData = {
   password: string;
   confirmPassword: string;
 };
 
-type ResetStatus = 'loading' | 'valid' | 'invalid' | 'expired' | 'success' | 'error';
+type ResetStatus =
+  | "loading"
+  | "valid"
+  | "invalid"
+  | "expired"
+  | "success"
+  | "error";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get('token');
-  
-  const [status, setStatus] = useState<ResetStatus>('loading');
+  const token = searchParams.get("token");
+
+  const [status, setStatus] = useState<ResetStatus>("loading");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -41,11 +55,11 @@ export default function ResetPasswordPage() {
     formState: { errors },
   } = useForm<ResetPasswordFormData>();
 
-  const password = watch('password');
+  const password = watch("password");
 
   useEffect(() => {
     if (!token) {
-      setStatus('invalid');
+      setStatus("invalid");
       return;
     }
 
@@ -54,26 +68,26 @@ export default function ResetPasswordPage() {
 
   const validateToken = async (resetToken: string) => {
     try {
-      const response = await fetch('/api/auth/reset-password/validate', {
-        method: 'POST',
+      const response = await fetch("/api/auth/reset-password/validate", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ token: resetToken }),
       });
 
       if (response.ok) {
-        setStatus('valid');
+        setStatus("valid");
       } else {
         const data = await response.json();
-        if (data.error === 'Token expired') {
-          setStatus('expired');
+        if (data.error === "Token expired") {
+          setStatus("expired");
         } else {
-          setStatus('invalid');
+          setStatus("invalid");
         }
       }
     } catch (error) {
-      setStatus('error');
+      setStatus("error");
     }
   };
 
@@ -84,10 +98,10 @@ export default function ResetPasswordPage() {
     setError(null);
 
     try {
-      const response = await fetch('/api/auth/reset-password/confirm', {
-        method: 'POST',
+      const response = await fetch("/api/auth/reset-password/confirm", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           token,
@@ -98,16 +112,16 @@ export default function ResetPasswordPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setStatus('success');
+        setStatus("success");
         // Redirect to sign-in page after 3 seconds
         setTimeout(() => {
-          router.push('/sign-in?reset=success');
+          router.push("/auth/sign-in?reset=success");
         }, 3000);
       } else {
-        setError(result.error || 'Failed to reset password');
+        setError(result.error || "Failed to reset password");
       }
     } catch (err) {
-      setError('An error occurred while resetting your password');
+      setError("An error occurred while resetting your password");
     } finally {
       setIsSubmitting(false);
     }
@@ -115,35 +129,39 @@ export default function ResetPasswordPage() {
 
   const getStatusContent = () => {
     switch (status) {
-      case 'loading':
+      case "loading":
         return {
           icon: <Loader2 className="h-12 w-12 animate-spin text-blue-500" />,
-          title: 'Validating Reset Link...',
-          description: 'Please wait while we verify your reset token.',
+          title: "Validating Reset Link...",
+          description: "Please wait while we verify your reset token.",
         };
-      case 'invalid':
+      case "invalid":
         return {
           icon: <XCircle className="h-12 w-12 text-red-500" />,
-          title: 'Invalid Reset Link',
-          description: 'This password reset link is invalid or has been used already.',
+          title: "Invalid Reset Link",
+          description:
+            "This password reset link is invalid or has been used already.",
         };
-      case 'expired':
+      case "expired":
         return {
           icon: <XCircle className="h-12 w-12 text-red-500" />,
-          title: 'Link Expired',
-          description: 'This password reset link has expired. Please request a new one.',
+          title: "Link Expired",
+          description:
+            "This password reset link has expired. Please request a new one.",
         };
-      case 'success':
+      case "success":
         return {
           icon: <CheckCircle className="h-12 w-12 text-green-500" />,
-          title: 'Password Reset Successful!',
-          description: 'Your password has been updated. You will be redirected to sign in.',
+          title: "Password Reset Successful!",
+          description:
+            "Your password has been updated. You will be redirected to sign in.",
         };
-      case 'error':
+      case "error":
         return {
           icon: <XCircle className="h-12 w-12 text-red-500" />,
-          title: 'Something Went Wrong',
-          description: 'There was an error processing your request. Please try again.',
+          title: "Something Went Wrong",
+          description:
+            "There was an error processing your request. Please try again.",
         };
       default:
         return null;
@@ -151,7 +169,7 @@ export default function ResetPasswordPage() {
   };
 
   // Show status screens for non-valid states
-  if (status !== 'valid') {
+  if (status !== "valid") {
     const content = getStatusContent();
     if (!content) return null;
 
@@ -172,29 +190,25 @@ export default function ResetPasswordPage() {
           {/* Status Card */}
           <Card className="shadow-lg">
             <CardHeader className="space-y-4 text-center">
-              <div className="flex justify-center">
-                {content.icon}
-              </div>
+              <div className="flex justify-center">{content.icon}</div>
               <CardTitle className="text-2xl font-bold">
                 {content.title}
               </CardTitle>
-              <CardDescription>
-                {content.description}
-              </CardDescription>
+              <CardDescription>{content.description}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Action Buttons */}
               <div className="space-y-2">
-                {status === 'success' ? (
+                {status === "success" ? (
                   <Button
-                    onClick={() => router.push('/sign-in')}
+                    onClick={() => router.push("/auth/sign-in")}
                     className="w-full"
                   >
                     Continue to Sign In
                   </Button>
-                ) : status === 'expired' || status === 'invalid' ? (
+                ) : status === "expired" || status === "invalid" ? (
                   <Button
-                    onClick={() => router.push('/auth/forgot-password')}
+                    onClick={() => router.push("/auth/forgot-password")}
                     className="w-full"
                   >
                     Request New Reset Link
@@ -202,7 +216,7 @@ export default function ResetPasswordPage() {
                 ) : null}
 
                 <Button
-                  onClick={() => router.push('/sign-in')}
+                  onClick={() => router.push("/auth/sign-in")}
                   variant="ghost"
                   className="w-full"
                 >
@@ -237,9 +251,7 @@ export default function ResetPasswordPage() {
             <CardTitle className="text-2xl font-bold">
               Reset Your Password
             </CardTitle>
-            <CardDescription>
-              Enter your new password below
-            </CardDescription>
+            <CardDescription>Enter your new password below</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Error Alert */}
@@ -255,34 +267,41 @@ export default function ResetPasswordPage() {
               <div className="space-y-2">
                 <Label htmlFor="password">New Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Lock className="text-muted-foreground absolute left-3 top-3 h-4 w-4" />
                   <Input
                     id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     placeholder="Enter your new password"
                     className="pl-10 pr-10"
-                    {...register('password', {
-                      required: 'Password is required',
+                    {...register("password", {
+                      required: "Password is required",
                       minLength: {
                         value: 8,
-                        message: 'Password must be at least 8 characters',
+                        message: "Password must be at least 8 characters",
                       },
                       pattern: {
                         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                        message: 'Password must contain uppercase, lowercase, and number',
+                        message:
+                          "Password must contain uppercase, lowercase, and number",
                       },
                     })}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground absolute right-3 top-3"
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-sm text-destructive">{errors.password.message}</p>
+                  <p className="text-destructive text-sm">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
 
@@ -290,35 +309,41 @@ export default function ResetPasswordPage() {
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm New Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Lock className="text-muted-foreground absolute left-3 top-3 h-4 w-4" />
                   <Input
                     id="confirmPassword"
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm your new password"
                     className="pl-10 pr-10"
-                    {...register('confirmPassword', {
-                      required: 'Please confirm your password',
+                    {...register("confirmPassword", {
+                      required: "Please confirm your password",
                       validate: (value) =>
-                        value === password || 'Passwords do not match',
+                        value === password || "Passwords do not match",
                     })}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground absolute right-3 top-3"
                   >
-                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </button>
                 </div>
                 {errors.confirmPassword && (
-                  <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+                  <p className="text-destructive text-sm">
+                    {errors.confirmPassword.message}
+                  </p>
                 )}
               </div>
 
               {/* Password Requirements */}
-              <div className="rounded-lg bg-muted p-3 text-sm">
+              <div className="bg-muted rounded-lg p-3 text-sm">
                 <p className="mb-2 font-medium">Password requirements:</p>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                <ul className="text-muted-foreground list-inside list-disc space-y-1">
                   <li>At least 8 characters long</li>
                   <li>Contains uppercase and lowercase letters</li>
                   <li>Contains at least one number</li>
@@ -344,8 +369,8 @@ export default function ResetPasswordPage() {
             {/* Back to Sign In */}
             <div className="text-center">
               <Link
-                href="/sign-in"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                href="/auth/sign-in"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
               >
                 Remember your password? Sign in
               </Link>
