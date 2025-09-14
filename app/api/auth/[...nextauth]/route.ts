@@ -13,10 +13,12 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
       isAdmin?: boolean;
+      emailVerified?: Date | null;
     };
   }
   interface JWT {
     isAdmin?: boolean;
+    emailVerified?: Date | null;
   }
 }
 
@@ -62,6 +64,7 @@ const handler = NextAuth({
           email: user.email,
           name: user.name,
           isAdmin: user.isAdmin,
+          emailVerified: user.emailVerified,
         };
       },
     }),
@@ -71,6 +74,7 @@ const handler = NextAuth({
       if (session.user && token.id) {
         session.user.id = token.id as string;
         session.user.isAdmin = token.isAdmin as boolean;
+        session.user.emailVerified = token.emailVerified as Date | null;
       }
       return session;
     },
@@ -78,6 +82,7 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.isAdmin = (user as any).isAdmin;
+        token.emailVerified = (user as any).emailVerified;
       }
       return token;
     },

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { createEmailVerificationToken } from "@/lib/auth/email-verification";
+import { sendEmailVerification } from "@/lib/auth/email-service";
 
 export async function POST(request: NextRequest) {
   try {
@@ -41,13 +43,33 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Generate and send email verification
+    try {
+      const verificationToken = await createEmailVerificationToken(user.id);
+      await sendEmailVerification(
+        email,
+        verificationToken,
+        user.name ?? undefined,
+      );
+
+      // Log for development
+      if (process.env.NODE_ENV === "development") {
+        console.log(`Verification email sent to: ${email}`);
+      }
+    } catch (emailError) {
+      console.error("Failed to send verification email:", emailError);
+      // Don't fail registration if email sending fails
+    }
+
     // Return user without password
     const { password: _, ...userWithoutPassword } = user;
 
     return NextResponse.json(
       {
-        message: "User created successfully",
+        message:
+          "User created successfully. Please check your email to verify your account.",
         user: userWithoutPassword,
+        emailVerificationSent: true,
       },
       { status: 201 },
     );

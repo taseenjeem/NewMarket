@@ -4,6 +4,9 @@ import { NextResponse } from "next/server";
 // Define protected routes
 const protectedRoutes = ["/profile", "/admin", "/api/user", "/api/admin"];
 
+// Define routes that require email verification
+const emailVerificationRequiredRoutes = ["/profile", "/admin", "/api/user", "/api/admin"];
+
 // Define admin-only routes
 const adminRoutes = ["/admin", "/api/admin"];
 
@@ -24,6 +27,14 @@ export default withAuth(
     // Check if user is trying to access auth pages while logged in
     if (token && authRoutes.some((route) => pathname.startsWith(route))) {
       return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    // Check email verification for routes that require it
+    if (token && emailVerificationRequiredRoutes.some((route) => pathname.startsWith(route))) {
+      if (!token.emailVerified) {
+        // Redirect to email verification page
+        return NextResponse.redirect(new URL("/auth/verify-email", req.url));
+      }
     }
 
     // Check if user is trying to access admin routes
