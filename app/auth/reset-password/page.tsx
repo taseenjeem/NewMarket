@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { toast } from "sonner";
 import {
   ArrowLeft,
   Lock,
@@ -43,8 +43,7 @@ export default function ResetPasswordPage() {
   const token = searchParams.get("token");
 
   const [status, setStatus] = useState<ResetStatus>("loading");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -94,8 +93,7 @@ export default function ResetPasswordPage() {
   const onSubmit = async (data: ResetPasswordFormData) => {
     if (!token) return;
 
-    setIsSubmitting(true);
-    setError(null);
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/auth/reset-password/confirm", {
@@ -113,17 +111,18 @@ export default function ResetPasswordPage() {
 
       if (response.ok) {
         setStatus("success");
+        toast.success("Password reset successfully! Redirecting to sign-in...");
         // Redirect to sign-in page after 3 seconds
         setTimeout(() => {
           router.push("/auth/sign-in?reset=success");
         }, 3000);
       } else {
-        setError(result.error || "Failed to reset password");
+        toast.error(result.error || "Failed to reset password");
       }
     } catch (err) {
-      setError("An error occurred while resetting your password");
+      toast.error("An error occurred while resetting your password");
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -254,13 +253,6 @@ export default function ResetPasswordPage() {
             <CardDescription>Enter your new password below</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Error Alert */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Password Field */}
@@ -351,8 +343,8 @@ export default function ResetPasswordPage() {
               </div>
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Updating Password...

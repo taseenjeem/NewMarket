@@ -16,9 +16,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Mail, Lock, ArrowLeft } from "lucide-react";
 import { FaGoogle } from "react-icons/fa6";
+import { toast } from "sonner";
 
 type SignInFormData = {
   email: string;
@@ -28,7 +28,6 @@ type SignInFormData = {
 export default function SignInPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -39,7 +38,6 @@ export default function SignInPage() {
 
   const onSubmit = async (data: SignInFormData) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       const result = await signIn("credentials", {
@@ -49,14 +47,24 @@ export default function SignInPage() {
       });
 
       if (result?.error) {
-        setError("Invalid email or password");
+        // Check if the error is due to unverified email
+        if (result.error === "EMAIL_NOT_VERIFIED") {
+          toast.error("Please verify your email address before signing in.");
+          // Redirect to verify email page with the email
+          router.push(
+            `/auth/verify-email?email=${encodeURIComponent(data.email)}`,
+          );
+          return;
+        }
+        toast.error("Invalid email or password");
       } else {
+        toast.success("Successfully signed in!");
         // Refresh session and redirect
         await getSession();
         router.push("/");
       }
     } catch (err) {
-      setError("An error occurred during sign in");
+      toast.error("An error occurred during sign in");
     } finally {
       setIsLoading(false);
     }
@@ -64,12 +72,11 @@ export default function SignInPage() {
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    setError(null);
 
     try {
       await signIn("google", { callbackUrl: "/" });
     } catch (err) {
-      setError("An error occurred during Google sign in");
+      toast.error("An error occurred during Google sign in");
       setIsLoading(false);
     }
   };
@@ -97,13 +104,6 @@ export default function SignInPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Error Alert */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
             {/* Social Login Button */}
             <Button
               variant="outline"

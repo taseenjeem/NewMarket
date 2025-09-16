@@ -2,9 +2,9 @@
 import { useState } from "react";
 import OrderSearchForm from "./OrderSearchForm";
 import OrderStatus from "./OrderStatus";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 // Mock data for demonstration
 const mockOrderData = {
@@ -96,11 +96,9 @@ const mockOrderData = {
 export default function TrackOrderContainer() {
   const [orderData, setOrderData] = useState<typeof mockOrderData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = async (orderId: string, email: string) => {
     setIsLoading(true);
-    setError(null);
 
     try {
       // Simulate API call
@@ -112,13 +110,14 @@ export default function TrackOrderContainer() {
         email.toLowerCase() === "john.doe@example.com"
       ) {
         setOrderData(mockOrderData);
+        toast.success("Order found successfully!");
       } else {
-        setError(
+        toast.error(
           "Order not found. Please check your order ID and email address.",
         );
       }
     } catch (err) {
-      setError(
+      toast.error(
         "An error occurred while searching for your order. Please try again.",
       );
     } finally {
@@ -128,7 +127,6 @@ export default function TrackOrderContainer() {
 
   const handleBackToSearch = () => {
     setOrderData(null);
-    setError(null);
   };
 
   return (
@@ -147,13 +145,6 @@ export default function TrackOrderContainer() {
             </div>
 
             <OrderSearchForm onSearch={handleSearch} isLoading={isLoading} />
-
-            {error && (
-              <Alert variant="destructive" className="mt-6">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
 
             <div className="bg-muted/50 mt-8 rounded-lg p-6">
               <h3 className="mb-3 font-semibold">Demo Credentials</h3>

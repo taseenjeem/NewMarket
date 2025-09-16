@@ -2,22 +2,28 @@
 
 This guide will help you configure email services for your authentication system (email verification and password reset).
 
-## Quick Setup Steps
+## 🚀 Recommended: Resend (Already Configured!)
 
-1. **Copy Environment File**
-   ```bash
-   cp .env.example .env.local
-   ```
+**Resend is now pre-configured and ready to use!** It's the best choice for modern applications.
 
-2. **Choose Your Email Provider** (pick one of the options below)
+**Quick Setup:**
+1. See the detailed [Resend Setup Guide](./RESEND_SETUP.md)
+2. Get your free API key from [resend.com](https://resend.com)
+3. Update your `.env.local` file with the API key
+4. Start sending emails!
 
-3. **Update Email Service Code** (uncomment your chosen provider)
-
-4. **Install Required Dependencies**
+**Why Resend?**
+- ✅ **Already integrated** - No additional setup needed
+- ✅ **3,000 free emails/month** - Perfect for development and small apps
+- ✅ **Modern developer experience** - Built for React/Next.js
+- ✅ **Great deliverability** - Professional email delivery
+- ✅ **React Email support** - Beautiful email templates
 
 ---
 
-## Email Provider Options
+## Alternative Email Provider Options
+
+If you prefer a different provider, here are other options:
 
 ### Option 1: Gmail/SMTP (Recommended for Development)
 

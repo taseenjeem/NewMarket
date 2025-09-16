@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { toast } from "sonner";
 import { ArrowLeft, Mail, CheckCircle, XCircle, Loader2 } from "lucide-react";
 
 type VerificationStatus =
@@ -18,27 +18,33 @@ type VerificationStatus =
   | "success"
   | "error"
   | "expired"
-  | "invalid";
+  | "invalid"
+  | "pending";
 
 export default function VerifyEmailPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const email = searchParams.get("email");
 
   const [status, setStatus] = useState<VerificationStatus>("loading");
-  const [message, setMessage] = useState<string>("");
   const [isResending, setIsResending] = useState(false);
-  const [resendMessage, setResendMessage] = useState<string>("");
 
   useEffect(() => {
     if (!token) {
-      setStatus("invalid");
-      setMessage("No verification token provided");
+      if (email) {
+        // User was redirected from registration
+        setStatus("pending");
+        toast.success(`We've sent a verification email to ${email}. Please check your inbox and click the verification link.`);
+      } else {
+        setStatus("invalid");
+        toast.error("No verification token provided");
+      }
       return;
     }
 
     verifyEmail(token);
-  }, [token]);
+  }, [token, email]);
 
   const verifyEmail = async (verificationToken: string) => {
     try {
@@ -54,7 +60,7 @@ export default function VerifyEmailPage() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage("Your email has been successfully verified!");
+        toast.success("Your email has been successfully verified!");
         // Redirect to sign-in page after 3 seconds
         setTimeout(() => {
           router.push("/auth/sign-in?verified=true");
@@ -62,23 +68,22 @@ export default function VerifyEmailPage() {
       } else {
         if (data.error === "Token expired") {
           setStatus("expired");
-          setMessage(
+          toast.error(
             "Your verification link has expired. Please request a new one.",
           );
         } else {
           setStatus("error");
-          setMessage(data.error || "Email verification failed");
+          toast.error(data.error || "Email verification failed");
         }
       }
     } catch (error) {
       setStatus("error");
-      setMessage("An error occurred during verification");
+      toast.error("An error occurred during verification");
     }
   };
 
   const handleResendVerification = async () => {
     setIsResending(true);
-    setResendMessage("");
 
     try {
       const response = await fetch("/api/auth/verify-email/send", {
@@ -86,18 +91,20 @@ export default function VerifyEmailPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ 
+          email: email || "" 
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setResendMessage("Verification email sent! Please check your inbox.");
+        toast.success("Verification email sent! Please check your inbox.");
       } else {
-        setResendMessage(data.error || "Failed to send verification email");
+        toast.error(data.error || "Failed to send verification email");
       }
     } catch (error) {
-      setResendMessage("An error occurred while sending verification email");
+      toast.error("An error occurred while sending verification email");
     } finally {
       setIsResending(false);
     }
@@ -109,6 +116,8 @@ export default function VerifyEmailPage() {
         return <Loader2 className="h-12 w-12 animate-spin text-blue-500" />;
       case "success":
         return <CheckCircle className="h-12 w-12 text-green-500" />;
+      case "pending":
+        return <Mail className="h-12 w-12 text-blue-500" />;
       case "error":
       case "expired":
       case "invalid":
@@ -124,6 +133,8 @@ export default function VerifyEmailPage() {
         return "Verifying Your Email...";
       case "success":
         return "Email Verified!";
+      case "pending":
+        return "Check Your Email";
       case "expired":
         return "Link Expired";
       case "error":
@@ -141,6 +152,8 @@ export default function VerifyEmailPage() {
         return "Please wait while we verify your email address...";
       case "success":
         return "You will be redirected to the sign-in page shortly.";
+      case "pending":
+        return "We've sent you a verification email. Click the link in the email to verify your account.";
       case "expired":
         return "Your verification link has expired. Request a new one below.";
       case "error":
@@ -176,15 +189,8 @@ export default function VerifyEmailPage() {
             <CardDescription>{getStatusDescription()}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Status Message */}
-            {message && (
-              <Alert variant={status === "success" ? "default" : "destructive"}>
-                <AlertDescription>{message}</AlertDescription>
-              </Alert>
-            )}
-
-            {/* Resend Verification (for expired/error states) */}
-            {(status === "expired" || status === "error") && (
+            {/* Resend Verification (for expired/error/pending states) */}
+            {(status === "expired" || status === "error" || status === "pending") && (
               <div className="space-y-3">
                 <Button
                   onClick={handleResendVerification}
@@ -205,11 +211,7 @@ export default function VerifyEmailPage() {
                   )}
                 </Button>
 
-                {resendMessage && (
-                  <Alert>
-                    <AlertDescription>{resendMessage}</AlertDescription>
-                  </Alert>
-                )}
+
               </div>
             )}
 

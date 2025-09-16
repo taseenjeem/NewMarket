@@ -29,7 +29,10 @@ export async function sendEmailVerification(
   const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken}`;
 
   const emailConfig: EmailConfig = {
-    from: process.env.EMAIL_FROM || "noreply@newmarket.com",
+    from:
+      process.env.NODE_ENV === "development"
+        ? "onboarding@resend.dev"
+        : process.env.EMAIL_FROM || "noreply@newmarket.com",
     to: email,
     subject: "Verify Your Email - New Market",
     html: generateVerificationEmailHTML(verificationUrl, userName),
@@ -37,10 +40,8 @@ export async function sendEmailVerification(
   };
 
   try {
-    // Choose your email provider implementation:
-    // await sendWithNodemailer(emailConfig);
-    // await sendWithSendGrid(emailConfig);
-    // await sendWithResend(emailConfig);
+    // Using Gmail SMTP as the email provider
+    await sendWithGmail(emailConfig);
 
     // For development, log the email content
     if (process.env.NODE_ENV === "development") {
@@ -66,7 +67,10 @@ export async function sendPasswordResetEmail(
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
 
   const emailConfig: EmailConfig = {
-    from: process.env.EMAIL_FROM || "noreply@newmarket.com",
+    from:
+      process.env.NODE_ENV === "development"
+        ? "onboarding@resend.dev"
+        : process.env.EMAIL_FROM || "noreply@newmarket.com",
     to: email,
     subject: "Reset Your Password - New Market",
     html: generateResetEmailHTML(resetUrl, userName),
@@ -74,10 +78,8 @@ export async function sendPasswordResetEmail(
   };
 
   try {
-    // Choose your email provider implementation:
-    // await sendWithNodemailer(emailConfig);
-    // await sendWithSendGrid(emailConfig);
-    // await sendWithResend(emailConfig);
+    // Using Gmail SMTP as the email provider
+    await sendWithGmail(emailConfig);
 
     // For development, log the email content
     if (process.env.NODE_ENV === "development") {
@@ -179,7 +181,10 @@ The New Market Team
 /**
  * Generate HTML email template for email verification
  */
-function generateVerificationEmailHTML(verificationUrl: string, userName?: string): string {
+function generateVerificationEmailHTML(
+  verificationUrl: string,
+  userName?: string,
+): string {
   return `
     <!DOCTYPE html>
     <html>
@@ -235,7 +240,10 @@ function generateVerificationEmailHTML(verificationUrl: string, userName?: strin
 /**
  * Generate plain text email for email verification
  */
-function generateVerificationEmailText(verificationUrl: string, userName?: string): string {
+function generateVerificationEmailText(
+  verificationUrl: string,
+  userName?: string,
+): string {
   return `
 New Market - Verify Your Email Address
 
@@ -293,13 +301,52 @@ async function sendWithSendGrid(config: EmailConfig) {
 */
 
 /**
- * Send email using Resend (uncomment and configure as needed)
+ * Send email using Resend
  */
-/*
-import { Resend } from 'resend';
+import nodemailer from "nodemailer";
 
-async function sendWithResend(config: EmailConfig) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  await resend.emails.send(config);
+async function sendWithGmail(config: EmailConfig) {
+  const emailUser = process.env.GMAIL_USER;
+  const emailPass = process.env.GMAIL_APP_PASSWORD;
+
+  if (!emailUser || !emailPass) {
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        "⚠️  Gmail credentials not configured. Email would be sent in production.",
+      );
+      return; // Skip sending in development when credentials are not set
+    }
+    throw new Error(
+      "Gmail credentials are required. Please set GMAIL_USER and GMAIL_APP_PASSWORD in your environment variables.",
+    );
+  }
+
+  // Create transporter
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: emailUser,
+      pass: emailPass,
+    },
+  });
+
+  try {
+    const result = await transporter.sendMail({
+      from: config.from,
+      to: config.to,
+      subject: config.subject,
+      html: config.html,
+      text: config.text,
+    });
+
+    if (process.env.NODE_ENV === "development") {
+      console.log("📧 Email sent successfully via Gmail SMTP!");
+      console.log("Message ID:", result.messageId);
+    }
+
+    return result;
+  } catch (error) {
+    console.error("❌ Gmail SMTP email sending failed:", error);
+    throw error;
+  }
 }
-*/

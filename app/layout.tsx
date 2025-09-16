@@ -7,6 +7,7 @@ import MainFooter from "@/components/global/footer/MainFooter";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import WovenBackground from "@/components/ui/WovenBackground";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontStyle = Barlow({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -40,6 +41,7 @@ export default function RootLayout({
             </StoreProvider>
           </ThemeProvider>
         </AuthProvider>
+        <Toaster closeButton position="top-center" richColors />
       </body>
     </html>
   );

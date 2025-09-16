@@ -59,6 +59,12 @@ const handler = NextAuth({
           return null;
         }
 
+        // Check if email is verified
+        if (!user.emailVerified) {
+          // Throw a specific error for unverified email
+          throw new Error("EMAIL_NOT_VERIFIED");
+        }
+
         return {
           id: user.id,
           email: user.email,

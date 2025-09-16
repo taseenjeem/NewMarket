@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { toast } from "sonner";
 import { Eye, EyeOff, Mail, Lock, User, ArrowLeft, Phone } from "lucide-react";
 import { FaGoogle } from "react-icons/fa6";
 
@@ -31,7 +31,6 @@ type SignUpFormData = {
 export default function SignUpPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -47,12 +46,11 @@ export default function SignUpPage() {
 
   const onSubmit = async (data: SignUpFormData) => {
     if (!acceptTerms) {
-      setError("Please accept the terms and conditions");
+      toast.error("Please accept the terms and conditions");
       return;
     }
 
     setIsLoading(true);
-    setError(null);
 
     try {
       const response = await fetch("/api/auth/register", {
@@ -70,26 +68,27 @@ export default function SignUpPage() {
       });
 
       if (response.ok) {
-        // Auto sign in after successful registration
-        const result = await signIn("credentials", {
-          email: data.email,
-          password: data.password,
-          redirect: false,
-        });
+        const responseData = await response.json();
 
-        if (result?.ok) {
-          router.push("/");
+        toast.success(
+          "Registration successful! Please check your email to verify your account.",
+        );
+        // Redirect to email verification page instead of auto sign-in
+        if (responseData.emailVerificationSent) {
+          router.push(
+            `/auth/verify-email?email=${encodeURIComponent(data.email)}`,
+          );
         } else {
-          setError(
-            "Registration successful, but sign in failed. Please try signing in manually.",
+          router.push(
+            "/auth/sign-in?message=Registration successful. Please sign in.",
           );
         }
       } else {
         const errorData = await response.json();
-        setError(errorData.message || "Registration failed");
+        toast.error(errorData.message || "Registration failed");
       }
     } catch (err) {
-      setError("An error occurred during registration");
+      toast.error("An error occurred during registration");
     } finally {
       setIsLoading(false);
     }
@@ -97,12 +96,13 @@ export default function SignUpPage() {
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    setError(null);
+    // Remove setError since it's not defined and not needed
+    // The error handling is done via toast notifications
 
     try {
       await signIn("google", { callbackUrl: "/" });
     } catch (err) {
-      setError("An error occurred during Google sign in");
+      toast.error("An error occurred during Google sign in");
       setIsLoading(false);
     }
   };
@@ -132,13 +132,6 @@ export default function SignUpPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Error Alert */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
             {/* Social Login Buttons */}
             <div className="w-full">
               <Button

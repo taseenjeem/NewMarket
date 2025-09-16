@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { toast } from "sonner";
 import { ArrowLeft, Mail, Loader2, CheckCircle } from "lucide-react";
 
 type ForgotPasswordFormData = {
@@ -23,8 +23,6 @@ type ForgotPasswordFormData = {
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string>("");
 
   const {
@@ -35,8 +33,6 @@ export default function ForgotPasswordPage() {
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
     setIsLoading(true);
-    setError(null);
-    setSuccess(false);
 
     try {
       const response = await fetch("/api/auth/reset-password/request", {
@@ -50,13 +46,13 @@ export default function ForgotPasswordPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setSuccess(true);
         setSubmittedEmail(data.email);
+        toast.success("Password reset email sent! Please check your inbox.");
       } else {
-        setError(result.error || "Failed to send reset email");
+        toast.error(result.error || "Failed to send reset email");
       }
     } catch (err) {
-      setError("An error occurred while sending the reset email");
+      toast.error("An error occurred while sending the reset email");
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +62,6 @@ export default function ForgotPasswordPage() {
     if (!submittedEmail) return;
 
     setIsLoading(true);
-    setError(null);
 
     try {
       const response = await fetch("/api/auth/reset-password/request", {
@@ -78,19 +73,19 @@ export default function ForgotPasswordPage() {
       });
 
       if (response.ok) {
-        setError(null);
+        toast.success("Password reset email sent! Please check your inbox.");
       } else {
         const result = await response.json();
-        setError(result.error || "Failed to resend reset email");
+        toast.error(result.error || "Failed to resend reset email");
       }
     } catch (err) {
-      setError("An error occurred while resending the reset email");
+      toast.error("An error occurred while resending the reset email");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (success) {
+  if (submittedEmail) {
     return (
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="w-full max-w-md space-y-6">
@@ -120,13 +115,6 @@ export default function ForgotPasswordPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Error Alert */}
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-
               {/* Instructions */}
               <div className="bg-muted rounded-lg p-4 text-sm">
                 <p className="mb-2 font-medium">What to do next:</p>
@@ -212,13 +200,6 @@ export default function ForgotPasswordPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Error Alert */}
-            {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Email Field */}
