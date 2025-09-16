@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -84,10 +85,7 @@ export default function DiscountsContainer() {
     setSelectedDiscount(null);
   };
 
-  const categories = useMemo(
-    () => Array.from(new Set(discounts.map((d) => d.category))),
-    [discounts],
-  );
+  const categories = useMemo(() => Array.from(new Set(discounts.map((d) => d.category))), [discounts]);
   const activeDiscounts = filteredDiscounts.filter(
     (d) => d.status === "active" && new Date(d.validUntil) > new Date(),
   );
