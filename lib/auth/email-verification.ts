@@ -25,7 +25,7 @@ export async function createEmailVerificationToken(
 ): Promise<string> {
   const token = generateEmailVerificationToken();
   const hashedToken = hashEmailVerificationToken(token);
-  const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+  const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   await prisma.user.update({
     where: { id: userId },

@@ -1,5 +1,4 @@
-// Email service for password reset functionality
-// This is a template that can be configured with your preferred email provider
+import nodemailer from "nodemailer";
 
 interface EmailConfig {
   from: string;
@@ -29,10 +28,7 @@ export async function sendEmailVerification(
   const verificationUrl = `${process.env.NEXTAUTH_URL}/auth/verify-email?token=${verificationToken}`;
 
   const emailConfig: EmailConfig = {
-    from:
-      process.env.NODE_ENV === "development"
-        ? "onboarding@resend.dev"
-        : process.env.EMAIL_FROM || "noreply@newmarket.com",
+    from: process.env.EMAIL_FROM || "noreply@newmarket.com",
     to: email,
     subject: "Verify Your Email - New Market",
     html: generateVerificationEmailHTML(verificationUrl, userName),
@@ -40,21 +36,10 @@ export async function sendEmailVerification(
   };
 
   try {
-    // Using Gmail SMTP as the email provider
     await sendWithGmail(emailConfig);
-
-    // For development, log the email content
-    if (process.env.NODE_ENV === "development") {
-      console.log("=== EMAIL VERIFICATION ====");
-      console.log(`To: ${emailConfig.to}`);
-      console.log(`Subject: ${emailConfig.subject}`);
-      console.log(`Verification URL: ${verificationUrl}`);
-      console.log("===========================");
-    }
 
     return { success: true };
   } catch (error) {
-    console.error("Failed to send email verification:", error);
     throw new Error("Failed to send email verification");
   }
 }
@@ -67,10 +52,7 @@ export async function sendPasswordResetEmail(
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
 
   const emailConfig: EmailConfig = {
-    from:
-      process.env.NODE_ENV === "development"
-        ? "onboarding@resend.dev"
-        : process.env.EMAIL_FROM || "noreply@newmarket.com",
+    from: process.env.EMAIL_FROM || "noreply@newmarket.com",
     to: email,
     subject: "Reset Your Password - New Market",
     html: generateResetEmailHTML(resetUrl, userName),
@@ -78,21 +60,10 @@ export async function sendPasswordResetEmail(
   };
 
   try {
-    // Using Gmail SMTP as the email provider
     await sendWithGmail(emailConfig);
-
-    // For development, log the email content
-    if (process.env.NODE_ENV === "development") {
-      console.log("=== PASSWORD RESET EMAIL ===");
-      console.log(`To: ${emailConfig.to}`);
-      console.log(`Subject: ${emailConfig.subject}`);
-      console.log(`Reset URL: ${resetUrl}`);
-      console.log("============================");
-    }
 
     return { success: true };
   } catch (error) {
-    console.error("Failed to send password reset email:", error);
     throw new Error("Failed to send password reset email");
   }
 }
@@ -265,63 +236,19 @@ The New Market Team
   `;
 }
 
-// Example implementations for different email providers:
-
-/**
- * Send email using Nodemailer (uncomment and configure as needed)
- */
-/*
-import nodemailer from 'nodemailer';
-
-async function sendWithNodemailer(config: EmailConfig) {
-  const transporter = nodemailer.createTransporter({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
-  await transporter.sendMail(config);
-}
-*/
-
-/**
- * Send email using SendGrid (uncomment and configure as needed)
- */
-/*
-import sgMail from '@sendgrid/mail';
-
-async function sendWithSendGrid(config: EmailConfig) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
-  await sgMail.send(config);
-}
-*/
-
-/**
- * Send email using Resend
- */
-import nodemailer from "nodemailer";
-
 async function sendWithGmail(config: EmailConfig) {
   const emailUser = process.env.GMAIL_USER;
   const emailPass = process.env.GMAIL_APP_PASSWORD;
 
   if (!emailUser || !emailPass) {
     if (process.env.NODE_ENV === "development") {
-      console.log(
-        "⚠️  Gmail credentials not configured. Email would be sent in production.",
-      );
-      return; // Skip sending in development when credentials are not set
+      return;
     }
     throw new Error(
       "Gmail credentials are required. Please set GMAIL_USER and GMAIL_APP_PASSWORD in your environment variables.",
     );
   }
 
-  // Create transporter
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -339,14 +266,8 @@ async function sendWithGmail(config: EmailConfig) {
       text: config.text,
     });
 
-    if (process.env.NODE_ENV === "development") {
-      console.log("📧 Email sent successfully via Gmail SMTP!");
-      console.log("Message ID:", result.messageId);
-    }
-
     return result;
   } catch (error) {
-    console.error("❌ Gmail SMTP email sending failed:", error);
     throw error;
   }
 }

@@ -14,7 +14,6 @@ export async function createPasswordResetToken(email: string) {
   const hashedToken = hashResetToken(token);
   const expires = new Date(Date.now() + 15 * 60 * 1000);
 
-  // Update user with reset token
   await prisma.user.update({
     where: { email },
     data: {

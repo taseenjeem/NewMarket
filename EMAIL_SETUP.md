@@ -2,28 +2,9 @@
 
 This guide will help you configure email services for your authentication system (email verification and password reset).
 
-## 🚀 Recommended: Resend (Already Configured!)
+## Email Provider Options
 
-**Resend is now pre-configured and ready to use!** It's the best choice for modern applications.
-
-**Quick Setup:**
-1. See the detailed [Resend Setup Guide](./RESEND_SETUP.md)
-2. Get your free API key from [resend.com](https://resend.com)
-3. Update your `.env.local` file with the API key
-4. Start sending emails!
-
-**Why Resend?**
-- ✅ **Already integrated** - No additional setup needed
-- ✅ **3,000 free emails/month** - Perfect for development and small apps
-- ✅ **Modern developer experience** - Built for React/Next.js
-- ✅ **Great deliverability** - Professional email delivery
-- ✅ **React Email support** - Beautiful email templates
-
----
-
-## Alternative Email Provider Options
-
-If you prefer a different provider, here are other options:
+Choose from the following email providers for your authentication system:
 
 ### Option 1: Gmail/SMTP (Recommended for Development)
 
@@ -88,31 +69,6 @@ If you prefer a different provider, here are other options:
    - Uncomment the sendWithSendGrid call (line 41)
 
 ---
-
-### Option 3: Resend (Modern Alternative)
-
-**Pros:** Developer-friendly, good free tier (3,000 emails/month)
-**Cons:** Newer service
-
-#### Setup Steps:
-
-1. **Create Resend Account:** https://resend.com
-2. **Generate API Key:** Dashboard → API Keys → Create
-
-3. **Update .env.local:**
-   ```env
-   EMAIL_FROM="noreply@yourdomain.com"
-   RESEND_API_KEY="your-resend-api-key"
-   ```
-
-4. **Install Resend:**
-   ```bash
-   npm install resend
-   ```
-
-5. **Update email-service.ts:**
-   - Uncomment the Resend implementation (lines 298-304)
-   - Uncomment the sendWithResend call (line 42)
 
 ---
 

@@ -1,6 +1,5 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,9 +33,7 @@ interface DiscountData {
 
 export default function DiscountsContainer() {
   const [discounts, setDiscounts] = useState<DiscountData[]>([]);
-  const [filteredDiscounts, setFilteredDiscounts] = useState<DiscountData[]>(
-    [],
-  );
+
   const [selectedDiscount, setSelectedDiscount] = useState<DiscountData | null>(
     null,
   );
@@ -52,9 +49,8 @@ export default function DiscountsContainer() {
         const response = await fetch("/json/discounts-coupons.json");
         const data = await response.json();
         setDiscounts(data);
-        setFilteredDiscounts(data);
       } catch (error) {
-        console.error("Failed to load discounts:", error);
+        setDiscounts([]);
       } finally {
         setLoading(false);
       }
@@ -63,9 +59,9 @@ export default function DiscountsContainer() {
     loadDiscounts();
   }, []);
 
-  // Filter discounts
-  useEffect(() => {
-    let filtered = discounts.filter((discount) => {
+  // Filter discounts with useMemo for better performance
+  const filteredDiscounts = useMemo(() => {
+    return discounts.filter((discount) => {
       const matchesSearch =
         discount.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         discount.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -76,8 +72,6 @@ export default function DiscountsContainer() {
 
       return matchesSearch && matchesCategory;
     });
-
-    setFilteredDiscounts(filtered);
   }, [discounts, searchTerm, selectedCategory]);
 
   const handleCardClick = (discount: DiscountData) => {
@@ -90,7 +84,10 @@ export default function DiscountsContainer() {
     setSelectedDiscount(null);
   };
 
-  const categories = Array.from(new Set(discounts.map((d) => d.category)));
+  const categories = useMemo(
+    () => Array.from(new Set(discounts.map((d) => d.category))),
+    [discounts],
+  );
   const activeDiscounts = filteredDiscounts.filter(
     (d) => d.status === "active" && new Date(d.validUntil) > new Date(),
   );

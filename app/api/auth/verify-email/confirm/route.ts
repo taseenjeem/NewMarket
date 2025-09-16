@@ -45,11 +45,6 @@ export async function POST(request: NextRequest) {
     // Mark email as verified
     await markEmailAsVerified(user.id);
 
-    // Log for development
-    if (process.env.NODE_ENV === "development") {
-      console.log(`Email verified for user: ${user.email}`);
-    }
-
     return NextResponse.json(
       {
         success: true,
@@ -58,8 +53,6 @@ export async function POST(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Email verification error:", error);
-
     // Handle validation errors
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -136,8 +129,6 @@ export async function GET(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Token validation error:", error);
-
     return NextResponse.json(
       {
         success: false,

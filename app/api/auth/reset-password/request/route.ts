@@ -38,12 +38,8 @@ export async function POST(request: NextRequest) {
           user.name || undefined,
         );
 
-        // Log for development (remove in production)
-        if (process.env.NODE_ENV === "development") {
-          console.log(`Password reset requested for: ${email}`);
-        }
+
       } catch (error) {
-        console.error("Error generating reset token:", error);
         // Still return success to prevent information leakage
       }
     }
@@ -58,8 +54,6 @@ export async function POST(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Password reset request error:", error);
-
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         {

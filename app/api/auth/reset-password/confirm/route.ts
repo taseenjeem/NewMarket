@@ -66,8 +66,6 @@ export async function POST(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Password reset confirmation error:", error);
-
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         {
@@ -127,8 +125,6 @@ export async function GET(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Token validation error:", error);
-
     return NextResponse.json(
       {
         success: false,

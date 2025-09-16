@@ -52,12 +52,7 @@ export async function POST(request: NextRequest) {
         user.name ?? undefined,
       );
 
-      // Log for development
-      if (process.env.NODE_ENV === "development") {
-        console.log(`Verification email sent to: ${email}`);
-      }
     } catch (emailError) {
-      console.error("Failed to send verification email:", emailError);
       // Don't fail registration if email sending fails
     }
 
@@ -74,7 +69,6 @@ export async function POST(request: NextRequest) {
       { status: 201 },
     );
   } catch (error) {
-    console.error("Registration error:", error);
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 },

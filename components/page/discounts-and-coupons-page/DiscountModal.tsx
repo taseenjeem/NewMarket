@@ -116,7 +116,7 @@ export default function DiscountModal({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy code:", err);
+      // Fallback for browsers that don't support clipboard API
     }
   };
 

@@ -55,11 +55,6 @@ export async function POST(request: NextRequest) {
       user.name || undefined,
     );
 
-    // Log for development
-    if (process.env.NODE_ENV === "development") {
-      console.log(`Verification email sent to: ${email}`);
-    }
-
     return NextResponse.json(
       {
         success: true,
@@ -68,7 +63,6 @@ export async function POST(request: NextRequest) {
       { status: 200 },
     );
   } catch (error) {
-    console.error("Send verification email error:", error);
 
     // Handle validation errors
     if (error instanceof z.ZodError) {

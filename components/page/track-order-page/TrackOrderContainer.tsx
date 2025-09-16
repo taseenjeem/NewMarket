@@ -6,95 +6,99 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-// Mock data for demonstration
-const mockOrderData = {
-  id: "ORD-123456789",
-  status: "shipped" as const,
-  orderDate: "2024-01-15T10:30:00Z",
-  estimatedDelivery: "2024-01-20T18:00:00Z",
-  trackingNumber: "1Z999AA1234567890",
-  shippingAddress: {
-    name: "John Doe",
-    street: "123 Main Street, Apt 4B",
-    city: "New York",
-    state: "NY",
-    zipCode: "10001",
-    country: "United States",
+const mockOrders = [
+  {
+    id: "ORD-123456789",
+    status: "shipped" as const,
+    orderDate: "2024-01-15T10:30:00Z",
+    estimatedDelivery: "2024-01-20T18:00:00Z",
+    trackingNumber: "1Z999AA1234567890",
+    shippingAddress: {
+      name: "John Doe",
+      street: "123 Main Street, Apt 4B",
+      city: "New York",
+      state: "NY",
+      zipCode: "10001",
+      country: "United States",
+    },
+    items: [
+      {
+        id: "item-1",
+        name: "Wireless Bluetooth Headphones",
+        quantity: 1,
+        price: 99.99,
+      },
+      {
+        id: "item-2",
+        name: "Phone Case - Clear",
+        quantity: 2,
+        price: 15.99,
+      },
+    ],
+    timeline: [
+      {
+        status: "Order Placed",
+        description:
+          "Your order has been successfully placed and is being prepared.",
+        date: "2024-01-15T10:30:00Z",
+        location: "New York, NY",
+        completed: true,
+      },
+      {
+        status: "Order Confirmed",
+        description: "Payment confirmed and order is being processed.",
+        date: "2024-01-15T11:15:00Z",
+        location: "New York, NY",
+        completed: true,
+      },
+      {
+        status: "Preparing for Shipment",
+        description: "Your items are being picked and packed at our warehouse.",
+        date: "2024-01-16T09:00:00Z",
+        location: "Distribution Center, NJ",
+        completed: true,
+      },
+      {
+        status: "Shipped",
+        description: "Your package has been shipped and is on its way to you.",
+        date: "2024-01-17T14:30:00Z",
+        location: "Distribution Center, NJ",
+        completed: true,
+      },
+      {
+        status: "In Transit",
+        description:
+          "Package is currently in transit to your delivery address.",
+        date: "2024-01-18T08:45:00Z",
+        location: "Philadelphia, PA",
+        completed: true,
+      },
+      {
+        status: "Out for Delivery",
+        description: "Your package is out for delivery and will arrive today.",
+        date: "2024-01-20T07:00:00Z",
+        location: "New York, NY",
+        completed: false,
+      },
+      {
+        status: "Delivered",
+        description: "Package has been delivered successfully.",
+        date: "2024-01-20T18:00:00Z",
+        location: "New York, NY",
+        completed: false,
+      },
+    ],
+    customerInfo: {
+      email: "john.doe@example.com",
+      phone: "+1 (555) 123-4567",
+    },
   },
-  items: [
-    {
-      id: "item-1",
-      name: "Wireless Bluetooth Headphones",
-      quantity: 1,
-      price: 99.99,
-    },
-    {
-      id: "item-2",
-      name: "Phone Case - Clear",
-      quantity: 2,
-      price: 15.99,
-    },
-  ],
-  timeline: [
-    {
-      status: "Order Placed",
-      description:
-        "Your order has been successfully placed and is being prepared.",
-      date: "2024-01-15T10:30:00Z",
-      location: "New York, NY",
-      completed: true,
-    },
-    {
-      status: "Order Confirmed",
-      description: "Payment confirmed and order is being processed.",
-      date: "2024-01-15T11:15:00Z",
-      location: "New York, NY",
-      completed: true,
-    },
-    {
-      status: "Preparing for Shipment",
-      description: "Your items are being picked and packed at our warehouse.",
-      date: "2024-01-16T09:00:00Z",
-      location: "Distribution Center, NJ",
-      completed: true,
-    },
-    {
-      status: "Shipped",
-      description: "Your package has been shipped and is on its way to you.",
-      date: "2024-01-17T14:30:00Z",
-      location: "Distribution Center, NJ",
-      completed: true,
-    },
-    {
-      status: "In Transit",
-      description: "Package is currently in transit to your delivery address.",
-      date: "2024-01-18T08:45:00Z",
-      location: "Philadelphia, PA",
-      completed: true,
-    },
-    {
-      status: "Out for Delivery",
-      description: "Your package is out for delivery and will arrive today.",
-      date: "2024-01-20T07:00:00Z",
-      location: "New York, NY",
-      completed: false,
-    },
-    {
-      status: "Delivered",
-      description: "Package has been delivered successfully.",
-      date: "2024-01-20T18:00:00Z",
-      location: "New York, NY",
-      completed: false,
-    },
-  ],
-  customerInfo: {
-    email: "john.doe@example.com",
-    phone: "+1 (555) 123-4567",
-  },
-};
+];
 
 export default function TrackOrderContainer() {
-  const [orderData, setOrderData] = useState<typeof mockOrderData | null>(null);
+  const [orderData, setOrderData] = useState<(typeof mockOrders)[0] | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (orderId: string, email: string) => {
@@ -109,7 +113,7 @@ export default function TrackOrderContainer() {
         orderId.toLowerCase() === "ord-123456789" &&
         email.toLowerCase() === "john.doe@example.com"
       ) {
-        setOrderData(mockOrderData);
+        setOrderData(mockOrders[0]);
         toast.success("Order found successfully!");
       } else {
         toast.error(

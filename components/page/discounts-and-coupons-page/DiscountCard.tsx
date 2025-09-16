@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { memo } from "react";
 import {
   Card,
   CardContent,
@@ -69,7 +70,7 @@ const isExpired = (validUntil: string) => {
   return expiryDate < now;
 };
 
-export default function DiscountCard({ discount, onClick }: DiscountCardProps) {
+function DiscountCard({ discount, onClick }: DiscountCardProps) {
   const discountText = getDiscountText(
     discount.discountType,
     discount.discountValue,
@@ -185,3 +186,5 @@ export default function DiscountCard({ discount, onClick }: DiscountCardProps) {
     </Card>
   );
 }
+
+export default memo(DiscountCard);

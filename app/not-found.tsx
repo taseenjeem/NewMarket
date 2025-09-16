@@ -8,7 +8,6 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <div className="mx-auto max-w-2xl space-y-8 text-center">
-        {/* 404 Visual */}
         <div className="relative">
           <div className="text-muted-foreground/20 select-none text-9xl font-bold">
             404

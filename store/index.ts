@@ -18,12 +18,9 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  // Optionally, you can blacklist certain reducers from being persisted
-  // blacklist: ['someNonPersistentSlice']
 };
 
 const rootReducer = combineReducers({
-  // Add more slices here
   example: exampleSlice,
   auth: authSlice,
 });
